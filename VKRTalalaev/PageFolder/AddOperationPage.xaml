@@ -1,0 +1,58 @@
+﻿<Page x:Class="VKRTalalaev.PageFolder.AddOperationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKRTalalaev.PageFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="420" d:DesignWidth="685"
+      Title="AddOperationPage" Background="#FF242A3A">
+
+    <Grid>
+        <!-- Define the rows and columns of the Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Header row -->
+            <RowDefinition Height="*"/>
+            <!-- Main content row -->
+            <RowDefinition Height="Auto"/>
+            <!-- Button row -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!-- First column -->
+            <ColumnDefinition Width="*" />
+            <!-- Second column -->
+            <ColumnDefinition Width="*" />
+            <!-- Third column -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
+                   Text="Добавление операции" 
+                   FontSize="24" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Margin="10"/>
+
+        <!-- StackPanels in columns -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
+            <TextBox Margin="15" Width="200"/>
+            <TextBox Margin="15" Width="200"/>
+            <TextBox Margin="15" Width="200"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
+            <TextBox Margin="15" Width="200"/>
+            <TextBox Margin="15" Width="200"/>
+            <TextBox Margin="15" Width="200"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
+            <TextBox Margin="15" Width="200"/>
+            <TextBox Margin="15" Width="200"/>
+            <TextBox Margin="15" Width="200"/>
+        </StackPanel>
+
+        <!-- Button -->
+        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Добавить" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" />
+    </Grid>
+</Page>

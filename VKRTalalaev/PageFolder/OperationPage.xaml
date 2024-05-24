@@ -57,7 +57,6 @@
             </StackPanel>
         </StackPanel>
 
-        <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="1"/>
         <Separator Background="#151C2B" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Margin="0,30,0,0" RenderTransformOrigin="0.5,0.5">
             <Separator.RenderTransform>
                 <TransformGroup>
@@ -68,19 +67,32 @@
                 </TransformGroup>
             </Separator.RenderTransform>
         </Separator>
-        <Border Background="#202532" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Grid.RowSpan="2"/>
-        <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Center" Width="525">
-            <ToggleButton Style="{StaticResource MaterialDesignFlatSecondaryButton}" Background="#34679F" Width="85" Height="15" Margin="10 0 10 0"
-                Content="Поступления" Foreground="White" FontSize="6" />
-            <ToggleButton Style="{StaticResource MaterialDesignFlatSecondaryButton}" Background="#34679F" Width="85" Height="15" Margin="10 0 10 0"
-                          Content="Выплата" Foreground="White" FontSize="6"/>
-            <ToggleButton Style="{StaticResource MaterialDesignFlatSecondaryButton}" Background="#34679F" Width="85" Height="15" Margin="10 0 10 0"
-                          Content="Перемещения" Foreground="White" FontSize="6"/>
-            <ToggleButton Style="{StaticResource MaterialDesignFlatSecondaryButton}" Background="#34679F" Width="85" Height="15" Margin="10 0 10 0"
-                          Content="Отгрузка" Foreground="White" FontSize="6"/>
-            <ToggleButton Style="{StaticResource MaterialDesignFlatSecondaryButton}" Background="#34679F" Width="85" Height="15" Margin="10 0 10 0"
-                          Content="Поставка" Foreground="White" FontSize="6"/>
-        </StackPanel>
+        <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
+            <Grid>
+                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  Background="{x:Null}"  Foreground="White">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="№"
+                                    Binding="{Binding IdOperation}"
+                                    Width="50" Foreground="White"/>
+
+                        <DataGridTextColumn Header="Название"
+                                    Binding="{Binding NameOperation}"
+                                    Width="*" Foreground="White"/>
+                        <DataGridTextColumn Header="Дата"
+                                    Binding="{Binding DateOperation, StringFormat=\{0:yyyy-MM-dd\}}"
+                                    Width="*" />
+                        <DataGridTextColumn Header="Контрагент"
+                                    Binding="{Binding Counterparty.CounterpartyName}"
+                                    Width="*" />
+                        <DataGridTextColumn Header="Статус"
+                                    Binding="{Binding Status.StatusName}"
+                                    Width="*" />
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+
         <Border Background="#242A3A" CornerRadius="12" Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Margin="10,10,10,10">
             <Grid Margin="12">
                 <Grid.RowDefinitions>
@@ -93,29 +105,27 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Vertical"  Grid.Row="1" Margin="0 0 3 0">
-                    <TextBlock Text="Юр.лица и счета" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="YUrLicaCMB" Style="{StaticResource MaterialDesignComboBox}"
-                              BorderBrush="LightGray" Height="19" Margin="0 0 0 30" />
-                    <TextBlock Text="Юр.лица и счета" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="CounterParty" Style="{StaticResource MaterialDesignComboBox}"
-          BorderBrush="LightGray" Height="19" Margin="0 00 0 30" />
-                    <TextBlock Text="Юр.лица и счета" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="Uchet" Style="{StaticResource MaterialDesignComboBox}"
-          BorderBrush="LightGray" Height="19"  />
+                    <TextBlock Text="Название" Foreground="White" FontSize="10"/>
+                    <ComboBox x:Name="NazvanieCMB" Style="{StaticResource MaterialDesignComboBox}"
+                              BorderBrush="LightGray" Height="19" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged" />
+                    <TextBlock Text="Дата" Foreground="White" FontSize="10"/>
+                    <ComboBox x:Name="DataCMB" Style="{StaticResource MaterialDesignComboBox}"
+          BorderBrush="LightGray" Height="19" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>
+                    <TextBlock Text="Контрагент" Foreground="White" FontSize="10"/>
+                    <ComboBox x:Name="CounterpartyCMB" Style="{StaticResource MaterialDesignComboBox}"
+          BorderBrush="LightGray" Height="19"  SelectionChanged="CMB_SelectionChanged" 
+                    ItemsSource="{Binding Operation}"
+                    DisplayMemberPath="CounterpartyName"
+                  SelectedValuePath="IdCounterParty"/>
                 </StackPanel>
 
 
-                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="3 0 0 0">
-                    <TextBlock Text="Проекты" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="ProjectCB" Style="{StaticResource MaterialDesignComboBox}"
-                        BorderBrush="LightGray" Height="19" Margin="0 0 0 30" />
-                    <TextBlock Text="Сделки" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="SdelikiCb" Style="{StaticResource MaterialDesignComboBox}"
-                        BorderBrush="LightGray" Height="19" Margin="0 00 0 30" />
-                    <TextBlock Text="Юр.лица и счета" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="Summa" Style="{StaticResource MaterialDesignComboBox}"
-                        BorderBrush="LightGray" Height="19"  />
+                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="2,0,0,89">
+                    <TextBlock Text="Статус" Foreground="White" FontSize="10"/>
+                    <ComboBox x:Name="StatusCMB" Style="{StaticResource MaterialDesignComboBox}"
+                        BorderBrush="LightGray" Height="19" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged"/>
                 </StackPanel>
+                <Button Grid.Column="1" Content="Сбросить " Click="ResetFilters_Click" HorizontalAlignment="Center" Margin="0,119,0,0" Grid.Row="1" VerticalAlignment="Top" Width="133"/>
             </Grid>
         </Border>
         <Border Background="#242A3A" CornerRadius="12" Grid.Column="2" Grid.Row="4"  Margin="10,10,10,10"/>
