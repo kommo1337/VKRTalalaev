@@ -141,7 +141,7 @@ namespace VKRTalalaev.PageFolder
 
         private void FullInfo_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new FullInfoEmployer(OperationsDataGrid.SelectedItem as Employer));
         }
     }
 }

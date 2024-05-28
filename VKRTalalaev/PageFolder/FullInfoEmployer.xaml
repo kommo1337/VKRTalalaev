@@ -8,89 +8,79 @@
       d:DesignHeight="682" d:DesignWidth="885"
       Title="FullInfoEmployer">
     <Page.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#673AB7" Offset="0"/>
-            <GradientStop Color="#FF5422B1" Offset="1"/>
+        <LinearGradientBrush EndPoint="0,0.9" StartPoint="0.3,0">
+            <GradientStop Color="#151C2B"/>
+            <GradientStop Color="#485E90" Offset="1"/>
         </LinearGradientBrush>
     </Page.Background>
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71" />
+            <RowDefinition Height="420"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
-        <TextBlock Text="Полная информация"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   Foreground="White"
-                   Margin="0,0,0,20"
-                   Grid.ColumnSpan="2"
-                   HorizontalAlignment="Center"/>
+        <!-- Title -->
+        <TextBlock Grid.ColumnSpan="2" Text="Информация о сотруднике" Foreground="White" FontSize="24" HorizontalAlignment="Left" Margin="293,20,0,0" Width="299"/>
 
-        <!-- Картинка товара -->
-        <Image Source="path_to_your_image.jpg"
-               Width="200"
-               Height="200"
-               Grid.Row="1"/>
-
-        <!-- Секция с пунктами -->
-        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBlock Text="Пункт 1" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-                <Button Content="Добавить"
-                        Width="75"
-                        Margin="10,0,0,0"
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Background="#9575CD"
-                        Foreground="White"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBlock Text="Пункт 2" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-                <Button Content="Добавить"
-                        Width="75"
-                        Margin="10,0,0,0"
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Background="#9575CD"
-                        Foreground="White"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBlock Text="Пункт 3" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-                <Button Content="Добавить"
-                        Width="75"
-                        Margin="10,0,0,0"
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Background="#9575CD"
-                        Foreground="White"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <TextBlock Text="Пункт 4" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
-                <Button Content="Добавить"
-                        Width="75"
-                        Margin="10,0,0,0"
-                        Style="{StaticResource MaterialDesignFlatButton}"
-                        Background="#9575CD"
-                        Foreground="White"/>
-            </StackPanel>
-            <TextBlock Text="Пункт 5" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
-            <TextBlock Text="Пункт 6" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
-            <TextBlock Text="Пункт 7" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
-            <TextBlock Text="Пункт 8" FontSize="16" Foreground="White"/>
+        <!-- Left Panel -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="374" Width="200" Grid.Row="1" Panel.ZIndex="1">
+            <Image    Width="148" Height="140" Margin="0,0,0,20" Name="Photo"/>
+            <TextBlock Text="Фамилия" Foreground="WhiteSmoke" Margin="0 9 0 0" />
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Surname}"/>
+            </Border>
+            <TextBlock Text="Имя" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6" Margin="0 5">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Name}"/>
+            </Border>
+            <TextBlock Text="Отчество" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Therdname}"/>
+            </Border>
         </StackPanel>
 
-        <!-- Кнопка выйти -->
-        <Button Content="Выйти"
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"
-                Margin="0,20,0,0"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Background="#7E57C2"
-                Foreground="White"/>
+        <!-- Right Panel -->
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="318" Width="200" Grid.Row="1" Panel.ZIndex="1">
+            <TextBlock Text="Телефон" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Phone}"/>
+            </Border>
+            <TextBlock Text="Почта" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6" Margin="0 5">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Email}"/>
+            </Border>
+            <TextBlock Text="Адрес" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" x:Name="AdresTb" />
+
+            </Border>
+            <Button Content="Показать фото паспорта" Width="195" Height="30" Margin="0,70" Name="PhotoPasportBtn" Click="PhotoPasportBtn_Click"/>
+
+        </StackPanel>
+        <Border BorderThickness="1" Grid.Row="1" Margin="74,10,74,158" CornerRadius="28" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#202532" Offset="0.163"/>
+                    <GradientStop Color="#FF33334C" Offset="0.987"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border BorderThickness="1" Grid.Row="1" Margin="58,0,89,158" CornerRadius="28" Grid.RowSpan="2" Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#202532" Offset="0.163"/>
+                    <GradientStop Color="#FF33334C" Offset="0.987"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Button Content="Назад" Name="BackButton" HorizontalAlignment="Left" Margin="362,108,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="160" Click="BackButton_Click"/>
+        <Image HorizontalAlignment="Left" Height="127" Margin="206,38,0,0" Grid.Row="2" VerticalAlignment="Top" Width="128" Name="PhotoPasport" Panel.ZIndex="3" Grid.Column="1" />
+
     </Grid>
 </Page>
