@@ -212,6 +212,9 @@
     <Compile Include="DataFolder\Employer.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataFolder\Gender.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataFolder\Goods.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -239,14 +242,41 @@
     <Compile Include="DataFolder\sysdiagrams.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataFolder\Type.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataFolder\TypeOfOperation.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataFolder\User.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\AddCounterparty.xaml.cs">
+      <DependentUpon>AddCounterparty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\AddEmployerPage.xaml.cs">
+      <DependentUpon>AddEmployerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\AddOperationPage.xaml.cs">
       <DependentUpon>AddOperationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\CounterParty.xaml.cs">
+      <DependentUpon>CounterParty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\EditCounterparty.xaml.cs">
+      <DependentUpon>EditCounterparty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\EditEmployer.xaml.cs">
+      <DependentUpon>EditEmployer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\EditOperationPage.xaml.cs">
+      <DependentUpon>EditOperationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\EmployerPage.xaml.cs">
+      <DependentUpon>EmployerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\FullInfoEmployer.xaml.cs">
+      <DependentUpon>FullInfoEmployer.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFolder\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -299,7 +329,39 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="PageFolder\AddCounterparty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\AddEmployerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\AddOperationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\CounterParty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\EditCounterparty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\EditEmployer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\EditOperationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\EmployerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\FullInfoEmployer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -328,24 +390,23 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Resource Include="ResourceFolder\ImageFolder\Logotip.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ResourceFolder\ImageFolder\Designer.png" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="DataFolder\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
       <DependentUpon>DBModel.edmx</DependentUpon>
+      <LastGenOutput>DBModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DataFolder\DBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DBModel.edmx</DependentUpon>
       <LastGenOutput>DBModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceFolder\ImageFolder\Logotip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceFolder\ImageFolder\Designer.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

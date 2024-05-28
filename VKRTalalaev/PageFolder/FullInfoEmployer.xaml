@@ -1,0 +1,96 @@
+﻿<Page x:Class="VKRTalalaev.PageFolder.FullInfoEmployer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKRTalalaev.PageFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="682" d:DesignWidth="885"
+      Title="FullInfoEmployer">
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#673AB7" Offset="0"/>
+            <GradientStop Color="#FF5422B1" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Полная информация"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   Margin="0,0,0,20"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"/>
+
+        <!-- Картинка товара -->
+        <Image Source="path_to_your_image.jpg"
+               Width="200"
+               Height="200"
+               Grid.Row="1"/>
+
+        <!-- Секция с пунктами -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Пункт 1" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <Button Content="Добавить"
+                        Width="75"
+                        Margin="10,0,0,0"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Background="#9575CD"
+                        Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Пункт 2" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <Button Content="Добавить"
+                        Width="75"
+                        Margin="10,0,0,0"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Background="#9575CD"
+                        Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Пункт 3" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <Button Content="Добавить"
+                        Width="75"
+                        Margin="10,0,0,0"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Background="#9575CD"
+                        Foreground="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Пункт 4" FontSize="16" Foreground="White" VerticalAlignment="Center"/>
+                <Button Content="Добавить"
+                        Width="75"
+                        Margin="10,0,0,0"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Background="#9575CD"
+                        Foreground="White"/>
+            </StackPanel>
+            <TextBlock Text="Пункт 5" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
+            <TextBlock Text="Пункт 6" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
+            <TextBlock Text="Пункт 7" FontSize="16" Foreground="White" Margin="0,0,0,10"/>
+            <TextBlock Text="Пункт 8" FontSize="16" Foreground="White"/>
+        </StackPanel>
+
+        <!-- Кнопка выйти -->
+        <Button Content="Выйти"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                Margin="0,20,0,0"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Background="#7E57C2"
+                Foreground="White"/>
+    </Grid>
+</Page>

@@ -26,6 +26,19 @@ namespace VKRTalalaev.WindowFolder
             MainFrame.Navigate(new OperationPage());
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new OperationPage());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new CounterParty());
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new EmployerPage());
+        }
     }
 }

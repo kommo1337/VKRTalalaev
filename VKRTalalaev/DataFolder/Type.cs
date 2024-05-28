@@ -12,23 +12,18 @@ namespace VKRTalalaev.DataFolder
     using System;
     using System.Collections.Generic;
     
-    public partial class Operation
+    public partial class Type
     {
-        public int IdOperation { get; set; }
-        public int IdTypeOfOperation { get; set; }
-        public string NameOperation { get; set; }
-        public System.DateTime DateOperation { get; set; }
-        public int IdCounterParty { get; set; }
-        public int IdStatus { get; set; }
-        public int IdProject { get; set; }
-        public int IdType { get; set; }
-        public int IdGoods { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Type()
+        {
+            this.Operation = new HashSet<Operation>();
+        }
     
-        public virtual Counterparty Counterparty { get; set; }
-        public virtual Goods Goods { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual Status Status { get; set; }
-        public virtual Type Type { get; set; }
-        public virtual TypeOfOperation TypeOfOperation { get; set; }
+        public int IdType { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Operation> Operation { get; set; }
     }
 }

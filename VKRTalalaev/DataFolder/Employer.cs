@@ -25,8 +25,17 @@ namespace VKRTalalaev.DataFolder
         public int IdGender { get; set; }
         public string Email { get; set; }
         public int IdUser { get; set; }
-    
+
+        public string FullName
+        {
+            get
+            {
+                return $"{Surname} {Name} {Therdname}";
+            }
+        }
+
         public virtual Adress Adress { get; set; }
+        public virtual Gender Gender { get; set; }
         public virtual User User { get; set; }
     }
 }

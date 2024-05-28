@@ -29,6 +29,11 @@ namespace VKRTalalaev.DataFolder
             return context;
         }
 
+        public static void ResetContext()
+        {
+            context = null;
+        }
+
 
         public DBEntities()
             : base("name=DBEntities")
@@ -44,6 +49,7 @@ namespace VKRTalalaev.DataFolder
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Counterparty> Counterparty { get; set; }
         public virtual DbSet<Employer> Employer { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Goods> Goods { get; set; }
         public virtual DbSet<Operation> Operation { get; set; }
         public virtual DbSet<Project> Project { get; set; }
@@ -51,6 +57,7 @@ namespace VKRTalalaev.DataFolder
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Street> Street { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Type> Type { get; set; }
         public virtual DbSet<TypeOfOperation> TypeOfOperation { get; set; }
         public virtual DbSet<User> User { get; set; }
     

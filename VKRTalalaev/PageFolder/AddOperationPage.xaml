@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:VKRTalalaev.PageFolder"
       mc:Ignorable="d" 
       d:DesignHeight="420" d:DesignWidth="685"
@@ -29,30 +30,60 @@
 
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
-                   Text="Добавление операции" 
-                   FontSize="24" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   Margin="10"/>
+               Text="Добавление операции" 
+               FontSize="24" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center" 
+               Margin="10"
+               Foreground="White"/>
 
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <TextBox Margin="15" Width="200"/>
-            <TextBox Margin="15" Width="200"/>
-            <TextBox Margin="15" Width="200"/>
-        </StackPanel>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Тип операции" x:Name="TypeOperationCB" 
+       BorderBrush="LightGray"
+            ItemsSource="{Binding Counterparty}" DisplayMemberPath="CounterpartyName"
+            SelectedValuePath="IdCounterparty"
+            SelectedValue="{Binding Path=IdCounterparty}"/>
+
+        
+        <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название операции" x:Name="NameOpeonTb" 
+                 Foreground="White" BorderBrush="LightGray"/>
+
+
+        <DatePicker Style="{StaticResource MaterialDesignDatePicker}" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
+</StackPanel>
+
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <TextBox Margin="15" Width="200"/>
-            <TextBox Margin="15" Width="200"/>
-            <TextBox Margin="15" Width="200"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Контрагент" x:Name="CounterpartyCb" 
+                   BorderBrush="LightGray"
+                  ItemsSource="{Binding Counterparty}" DisplayMemberPath="CounterpartyName"
+            SelectedValuePath="IdCounterparty"
+            SelectedValue="{Binding Path=IdCounterparty}"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Статус" x:Name="StatusCb" 
+                   BorderBrush="LightGray"
+                        ItemsSource="{Binding Status}" DisplayMemberPath="StatusName"
+                        SelectedValuePath="IdStatus"
+                        SelectedValue="{Binding Path=IdStatus}"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Проект" x:Name="ProjectCb" 
+                   BorderBrush="LightGray"     
+                  ItemsSource="{Binding Project}" DisplayMemberPath="ProjectName"
+                    SelectedValuePath="IdProject"
+                    SelectedValue="{Binding Path=IdProject}"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <TextBox Margin="15" Width="200"/>
-            <TextBox Margin="15" Width="200"/>
-            <TextBox Margin="15" Width="200"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Тип" x:Name="TypeCb"
+                  BorderBrush="LightGray"
+                        ItemsSource="{Binding Type}" DisplayMemberPath="Name"
+    SelectedValuePath="IdType"
+            SelectedValue="{Binding Path=IdType}"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Материалы" x:Name="GoodsCb" 
+                  BorderBrush="LightGray"      ItemsSource="{Binding Goods}" DisplayMemberPath="Name"
+            SelectedValuePath="IdGoods"
+                SelectedValue="{Binding Path=IdGoods}"/>
+
         </StackPanel>
 
         <!-- Button -->
-        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Добавить" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" />
+        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Добавить" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" Click="Button_Click" />
     </Grid>
 </Page>

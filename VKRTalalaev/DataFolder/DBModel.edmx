@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Adress">
           <Key>
             <PropertyRef Name="IdAdress" />
@@ -51,11 +51,18 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="IdGender" />
+          </Key>
+          <Property Name="IdGender" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Goods">
           <Key>
             <PropertyRef Name="IdGoods" />
           </Key>
-          <Property Name="IdGoods" Type="int" Nullable="false" />
+          <Property Name="IdGoods" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Articul" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="int" Nullable="false" />
@@ -112,6 +119,13 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeOfOperation">
           <Key>
@@ -178,6 +192,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employer_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="IdGender" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employer_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
@@ -235,6 +261,18 @@
             </Principal>
             <Dependent Role="Operation">
               <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operation_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="IdType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -298,6 +336,7 @@
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Counterparty" EntityType="Self.Counterparty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Operation" EntityType="Self.Operation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
@@ -305,6 +344,7 @@
           <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfOperation" EntityType="Self.TypeOfOperation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Adress_City" Association="Self.FK_Adress_City">
@@ -321,6 +361,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Employer_Adress" Association="Self.FK_Employer_Adress">
             <End Role="Adress" EntitySet="Adress" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employer_Gender" Association="Self.FK_Employer_Gender">
+            <End Role="Gender" EntitySet="Gender" />
             <End Role="Employer" EntitySet="Employer" />
           </AssociationSet>
           <AssociationSet Name="FK_Employer_User" Association="Self.FK_Employer_User">
@@ -343,6 +387,10 @@
             <End Role="Status" EntitySet="Status" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
+          <AssociationSet Name="FK_Operation_Type" Association="Self.FK_Operation_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
           <AssociationSet Name="FK_Operation_TypeOfOperation" Association="Self.FK_Operation_TypeOfOperation">
             <End Role="TypeOfOperation" EntitySet="TypeOfOperation" />
             <End Role="Operation" EntitySet="Operation" />
@@ -352,7 +400,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -409,13 +458,22 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IdUser" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Adress" Relationship="Self.FK_Employer_Adress" FromRole="Employer" ToRole="Adress" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_Employer_Gender" FromRole="Employer" ToRole="Gender" />
           <NavigationProperty Name="User" Relationship="Self.FK_Employer_User" FromRole="Employer" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="IdGender" />
+          </Key>
+          <Property Name="IdGender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employer" Relationship="Self.FK_Employer_Gender" FromRole="Gender" ToRole="Employer" />
         </EntityType>
         <EntityType Name="Goods">
           <Key>
             <PropertyRef Name="IdGoods" />
           </Key>
-          <Property Name="IdGoods" Type="Int32" Nullable="false" />
+          <Property Name="IdGoods" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Articul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
@@ -439,6 +497,7 @@
           <NavigationProperty Name="Goods" Relationship="Self.FK_Operation_Goods" FromRole="Operation" ToRole="Goods" />
           <NavigationProperty Name="Project" Relationship="Self.FK_Operation_Project" FromRole="Operation" ToRole="Project" />
           <NavigationProperty Name="Status" Relationship="Self.FK_Operation_Status" FromRole="Operation" ToRole="Status" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Operation_Type" FromRole="Operation" ToRole="Type" />
           <NavigationProperty Name="TypeOfOperation" Relationship="Self.FK_Operation_TypeOfOperation" FromRole="Operation" ToRole="TypeOfOperation" />
         </EntityType>
         <EntityType Name="Project">
@@ -482,6 +541,14 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="IdType" />
+          </Key>
+          <Property Name="IdType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Operation" Relationship="Self.FK_Operation_Type" FromRole="Type" ToRole="Operation" />
         </EntityType>
         <EntityType Name="TypeOfOperation">
           <Key>
@@ -563,6 +630,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employer_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="IdGender" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="IdGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employer_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
@@ -611,6 +690,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Operation_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="IdType" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="IdType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Operation_TypeOfOperation">
           <End Role="TypeOfOperation" Type="Self.TypeOfOperation" Multiplicity="1" />
           <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
@@ -640,6 +731,7 @@
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Counterparty" EntityType="Self.Counterparty" />
           <EntitySet Name="Employer" EntityType="Self.Employer" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
           <EntitySet Name="Goods" EntityType="Self.Goods" />
           <EntitySet Name="Operation" EntityType="Self.Operation" />
           <EntitySet Name="Project" EntityType="Self.Project" />
@@ -647,6 +739,7 @@
           <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="Street" EntityType="Self.Street" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type" EntityType="Self.Type" />
           <EntitySet Name="TypeOfOperation" EntityType="Self.TypeOfOperation" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_Adress_City" Association="Self.FK_Adress_City">
@@ -669,6 +762,10 @@
             <End Role="Counterparty" EntitySet="Counterparty" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employer_Gender" Association="Self.FK_Employer_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employer_User" Association="Self.FK_Employer_User">
             <End Role="User" EntitySet="User" />
             <End Role="Employer" EntitySet="Employer" />
@@ -683,6 +780,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Operation_Status" Association="Self.FK_Operation_Status">
             <End Role="Status" EntitySet="Status" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operation_Type" Association="Self.FK_Operation_Type">
+            <End Role="Type" EntitySet="Type" />
             <End Role="Operation" EntitySet="Operation" />
           </AssociationSet>
           <AssociationSet Name="FK_Operation_TypeOfOperation" Association="Self.FK_Operation_TypeOfOperation">
@@ -791,6 +892,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="DBModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Goods">
             <EntityTypeMapping TypeName="DBModel.Goods">
               <MappingFragment StoreEntitySet="Goods">
@@ -857,6 +966,14 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type">
+            <EntityTypeMapping TypeName="DBModel.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="IdType" ColumnName="IdType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

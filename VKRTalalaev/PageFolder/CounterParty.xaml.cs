@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,51 +21,56 @@ using VKRTalalaev.DataFolder;
 namespace VKRTalalaev.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для OperationPage.xaml
+    /// Логика взаимодействия для CounterParty.xaml
     /// </summary>
-    public partial class OperationPage : Page
+    public partial class CounterParty : Page
     {
-        public OperationPage()
+
+        private bool IsFotoLoaded;
+        private byte[] FotoImageData;
+
+        public CounterParty()
         {
             InitializeComponent();
-            OperationsDataGrid.ItemsSource = DBEntities.GetContext().Operation.
-        ToList().OrderBy(u => u.IdOperation);
+            OperationsDataGrid.ItemsSource = DBEntities.GetContext().Counterparty.
+        ToList().OrderBy(u => u.IdCounterparty);
             LoadComboBoxData();
         }
+
         private void LoadComboBoxData()
         {
-            NazvanieCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.NameOperation).Distinct().ToList();
-            DataCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.DateOperation).Distinct().ToList();
-            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdCounterParty).Distinct().ToList();
-            StatusCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdStatus).Distinct().ToList();
+            NazvanieCMB.ItemsSource = DBEntities.GetContext().Counterparty.Select(o => o.CounterpartyName).Distinct().ToList();
+            DataCMB.ItemsSource = DBEntities.GetContext().Counterparty.Select(o => o.INN).Distinct().ToList();
+            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Counterparty.Select(o => o.KPP).Distinct().ToList();
+            StatusCMB.ItemsSource = DBEntities.GetContext().Counterparty.Select(o => o.FinancialAccaunt).Distinct().ToList();
         }
 
         private void LoadDataGridData()
         {
-            var operations = DBEntities.GetContext().Operation.AsQueryable();
+            var operations = DBEntities.GetContext().Counterparty.AsQueryable();
 
             if (NazvanieCMB.SelectedItem != null)
             {
                 string selectedName = NazvanieCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.NameOperation == selectedName);
+                operations = operations.Where(o => o.CounterpartyName == selectedName);
             }
 
             if (DataCMB.SelectedItem != null)
             {
-                DateTime selectedData = Convert.ToDateTime(DataCMB.SelectedItem);
-                operations = operations.Where(o => o.DateOperation == selectedData);
+                int selectedData = (int)DataCMB.SelectedItem;
+                operations = operations.Where(o => o.INN == selectedData);
             }
 
             if (CounterpartyCMB.SelectedItem != null)
             {
                 int selectedCounterparty = (int)CounterpartyCMB.SelectedItem;
-                operations = operations.Where(o => o.IdCounterParty == selectedCounterparty);
+                operations = operations.Where(o => o.KPP == selectedCounterparty);
             }
 
             if (StatusCMB.SelectedItem != null)
             {
                 int selectedStatus = (int)StatusCMB.SelectedItem;
-                operations = operations.Where(o => o.IdStatus == selectedStatus);
+                operations = operations.Where(o => o.FinancialAccaunt == selectedStatus);
             }
 
             OperationsDataGrid.ItemsSource = operations.ToList();
@@ -86,7 +93,7 @@ namespace VKRTalalaev.PageFolder
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTb.Text.ToLower();
-            var customers = DBEntities.GetContext().Operation.ToList();
+            var customers = DBEntities.GetContext().Counterparty.ToList();
             var filteredCustomers = customers.Where(customer =>
             {
                 foreach (PropertyInfo property in customer.GetType().GetProperties())
@@ -98,7 +105,7 @@ namespace VKRTalalaev.PageFolder
                     }
                 }
                 return false;
-            }).OrderBy(u => u.NameOperation).ToList();
+            }).OrderBy(u => u.CounterpartyName).ToList();
 
             OperationsDataGrid.ItemsSource = filteredCustomers;
 
@@ -115,12 +122,14 @@ namespace VKRTalalaev.PageFolder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddOperationPage());
+            NavigationService.Navigate(new AddCounterparty());
         }
 
         private void modifyIt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditOperationPage(OperationsDataGrid.SelectedItem as Operation));
+            NavigationService.Navigate(new EditCounterparty(OperationsDataGrid.SelectedItem as Counterparty));
         }
+
+        
     }
 }

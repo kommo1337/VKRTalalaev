@@ -15,55 +15,71 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VKRTalalaev.ClassFolder;
 using VKRTalalaev.DataFolder;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace VKRTalalaev.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для OperationPage.xaml
+    /// Логика взаимодействия для EmployerPage.xaml
     /// </summary>
-    public partial class OperationPage : Page
+    public partial class EmployerPage : Page
     {
-        public OperationPage()
+        public EmployerPage()
         {
             InitializeComponent();
-            OperationsDataGrid.ItemsSource = DBEntities.GetContext().Operation.
-        ToList().OrderBy(u => u.IdOperation);
             LoadComboBoxData();
+            LoadDataGridData();
         }
-        private void LoadComboBoxData()
+
+        private  void LoadComboBoxData()
         {
-            NazvanieCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.NameOperation).Distinct().ToList();
-            DataCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.DateOperation).Distinct().ToList();
-            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdCounterParty).Distinct().ToList();
-            StatusCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdStatus).Distinct().ToList();
+            try
+            {
+                using (var context = DBEntities.GetContext())
+                {
+                     var fullNames = context.Employer
+                                           .Select(e => e.Surname + " " + e.Name + " " + e.Therdname)
+                    .ToList();
+
+                    NazvanieCMB.ItemsSource = fullNames;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            DBEntities.ResetContext();
+            DataCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Phone).Distinct().ToList();
+            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.IdGender).Distinct().ToList();
+            StatusCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Email).Distinct().ToList();
         }
 
         private void LoadDataGridData()
         {
-            var operations = DBEntities.GetContext().Operation.AsQueryable();
+            var operations = DBEntities.GetContext().Employer.AsQueryable();
 
             if (NazvanieCMB.SelectedItem != null)
             {
                 string selectedName = NazvanieCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.NameOperation == selectedName);
+                operations = operations.Where(o => o.Name == selectedName); //TODO посик по ФИО
             }
 
             if (DataCMB.SelectedItem != null)
             {
-                DateTime selectedData = Convert.ToDateTime(DataCMB.SelectedItem);
-                operations = operations.Where(o => o.DateOperation == selectedData);
+                string selectedData = DataCMB.SelectedItem.ToString();
+                operations = operations.Where(o => o.Phone == selectedData);
             }
 
             if (CounterpartyCMB.SelectedItem != null)
             {
                 int selectedCounterparty = (int)CounterpartyCMB.SelectedItem;
-                operations = operations.Where(o => o.IdCounterParty == selectedCounterparty);
+                operations = operations.Where(o => o.IdGender == selectedCounterparty);
             }
 
             if (StatusCMB.SelectedItem != null)
             {
-                int selectedStatus = (int)StatusCMB.SelectedItem;
-                operations = operations.Where(o => o.IdStatus == selectedStatus);
+                string selectedStatus = StatusCMB.SelectedItem.ToString();
+                operations = operations.Where(o => o.Email == selectedStatus);
             }
 
             OperationsDataGrid.ItemsSource = operations.ToList();
@@ -86,7 +102,7 @@ namespace VKRTalalaev.PageFolder
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTb.Text.ToLower();
-            var customers = DBEntities.GetContext().Operation.ToList();
+            var customers = DBEntities.GetContext().Employer.ToList();
             var filteredCustomers = customers.Where(customer =>
             {
                 foreach (PropertyInfo property in customer.GetType().GetProperties())
@@ -98,7 +114,7 @@ namespace VKRTalalaev.PageFolder
                     }
                 }
                 return false;
-            }).OrderBy(u => u.NameOperation).ToList();
+            }).OrderBy(u => u.Name).ToList();
 
             OperationsDataGrid.ItemsSource = filteredCustomers;
 
@@ -115,12 +131,17 @@ namespace VKRTalalaev.PageFolder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddOperationPage());
+            NavigationService.Navigate(new AddEmployerPage());
         }
 
         private void modifyIt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditOperationPage(OperationsDataGrid.SelectedItem as Operation));
+            NavigationService.Navigate(new EditEmployer(OperationsDataGrid.SelectedItem as Employer));
+        }
+
+        private void FullInfo_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
