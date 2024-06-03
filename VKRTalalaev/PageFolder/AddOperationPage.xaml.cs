@@ -29,6 +29,7 @@ namespace VKRTalalaev.PageFolder
 
         private void LoadComboBoxData()
         {
+            DBEntities.ResetContext();
             TypeOperationCB.ItemsSource = DBEntities.GetContext().TypeOfOperation.ToList();
             CounterpartyCb.ItemsSource = DBEntities.GetContext().Counterparty.ToList();
             StatusCb.ItemsSource = DBEntities.GetContext().Status.ToList();

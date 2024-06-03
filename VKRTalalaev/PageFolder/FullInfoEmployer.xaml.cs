@@ -75,7 +75,7 @@ namespace VKRTalalaev.PageFolder
                     }
                     else
                     {
-                        ClassFolder.MBClass.ErrorMB("Фото не найдено или повреждено");
+                        
                     }
                 }
                 catch (Exception ex)
@@ -110,7 +110,7 @@ namespace VKRTalalaev.PageFolder
                     }
                     else
                     {
-                        ClassFolder.MBClass.ErrorMB("Фото не найдено или повреждено");
+                        
                     }
                 }
                 catch (Exception ex)
@@ -122,6 +122,7 @@ namespace VKRTalalaev.PageFolder
 
         private void DisplayAddress(int addressId) //TODO не воркает 
         {
+            DBEntities.ResetContext();
             using (var context = DBEntities.GetContext())
             {
                 var adress = context.Adress

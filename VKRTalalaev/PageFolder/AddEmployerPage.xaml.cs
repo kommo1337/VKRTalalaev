@@ -34,6 +34,7 @@ namespace VKRTalalaev.PageFolder
 
         private void LoadComboBoxData()
         {
+            DBEntities.ResetContext();
             AdresCb.ItemsSource = DBEntities.GetContext().Adress.ToList();
             GenderCb.ItemsSource = DBEntities.GetContext().Gender.ToList();
             UserCb.ItemsSource = DBEntities.GetContext().User.ToList();

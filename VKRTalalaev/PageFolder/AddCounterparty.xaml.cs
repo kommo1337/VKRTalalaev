@@ -64,7 +64,7 @@ namespace VKRTalalaev.PageFolder
 
         private void LoadComboBoxData()
         {
-
+            DBEntities.ResetContext();
             AdresCb.ItemsSource = DBEntities.GetContext().Adress.ToList();
         }
 

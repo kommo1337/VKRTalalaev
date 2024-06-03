@@ -86,7 +86,7 @@
         </StackPanel>
 
         <!-- Button -->
-        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Добавить" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" Click="Button_Click_2" />
+        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Редактировать" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" Click="Button_Click_2" />
 
     </Grid>
 </Page>

@@ -33,18 +33,15 @@ namespace VKRTalalaev.PageFolder
             InitializeComponent();
             DataContext = user;
             this.user = user;
-
+            DBEntities.ResetContext();
             LoadCounterpartyPhoto(user.IdCounterparty);
             LoadComboBoxData();
         }
 
         private void LoadComboBoxData()
         {
-            DBEntities.ResetContext(); 
-            using (var context = DBEntities.GetContext())
-            {
-                AdresCb.ItemsSource = context.Adress.ToList();
-            }
+            DBEntities.ResetContext();
+            AdresCb.ItemsSource = DBEntities.GetContext().Adress.ToList();
         }
 
 
