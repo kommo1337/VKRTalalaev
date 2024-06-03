@@ -36,7 +36,6 @@ namespace VKRTalalaev.PageFolder
             LoadCounterpartyPhotoPasport(Emp.IdEmployer);
             DisplayAddress(Emp.IdEmployer);
 
-
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

@@ -185,6 +185,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ClassFolder\MBClass.cs" />
+    <Compile Include="ClassFolder\VariableClass.cs" />
     <Compile Include="DataFolder\Adress.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -257,6 +258,9 @@
     <Compile Include="PageFolder\AddEmployerPage.xaml.cs">
       <DependentUpon>AddEmployerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\AddGoods.xaml.cs">
+      <DependentUpon>AddGoods.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\AddOperationPage.xaml.cs">
       <DependentUpon>AddOperationPage.xaml</DependentUpon>
     </Compile>
@@ -269,6 +273,9 @@
     <Compile Include="PageFolder\EditEmployer.xaml.cs">
       <DependentUpon>EditEmployer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFolder\EditGoods.xaml.cs">
+      <DependentUpon>EditGoods.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFolder\EditOperationPage.xaml.cs">
       <DependentUpon>EditOperationPage.xaml</DependentUpon>
     </Compile>
@@ -277,6 +284,9 @@
     </Compile>
     <Compile Include="PageFolder\FullInfoEmployer.xaml.cs">
       <DependentUpon>FullInfoEmployer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFolder\Goodspage.xaml.cs">
+      <DependentUpon>Goodspage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFolder\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -337,6 +347,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFolder\AddGoods.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\AddOperationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,6 +367,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFolder\EditGoods.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFolder\EditOperationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -362,6 +380,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFolder\FullInfoEmployer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFolder\Goodspage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

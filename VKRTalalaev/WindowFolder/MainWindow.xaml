@@ -69,16 +69,16 @@
                         <TextBlock Text="Сотрудники"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource menuButton}" Margin="3,15,3,3">
+                <!--<Button Style="{StaticResource menuButton}" Margin="3,15,3,3">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="Projector" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Проект"/>
                     </StackPanel>
-                </Button>
-                <Button Style="{StaticResource menuButton}" Margin="3,15,3,3">
+                </Button>-->
+                <Button Style="{StaticResource menuButton}" Margin="3,15,3,3" Click="Button_Click_3">
                     <StackPanel Orientation="Horizontal">
                         <Icon:PackIconMaterial Kind="StateMachine" Style="{StaticResource menuButtonIcon}"/>
-                        <TextBlock Text="Отчет"/>
+                        <TextBlock Text="Товары"/>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource menuButton}" Margin="3,15,3,3">

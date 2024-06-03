@@ -32,10 +32,32 @@ namespace VKRTalalaev.PageFolder
         public CounterParty()
         {
             InitializeComponent();
+            DBEntities.ResetContext();
             OperationsDataGrid.ItemsSource = DBEntities.GetContext().Counterparty.
-        ToList().OrderBy(u => u.IdCounterparty);
+            ToList().OrderBy(u => u.IdCounterparty);
+            DBEntities.ResetContext();
             LoadComboBoxData();
+            LoadEllipseImage();
+            DBEntities.ResetContext();
+            using (var context = DBEntities.GetContext())
+            {
+                var employer = context.Employer
+                                      .Where(e => e.IdUser == VariableClass.CurentUser)
+                                      .Select(e => new { e.Name, e.Surname })
+                                      .FirstOrDefault();
+
+                if (employer != null)
+                {
+                    NameUserTb.Text = $"{employer.Name} {employer.Surname}";
+                }
+                else
+                {
+                    NameUserTb.Text = "User not found";
+                }
+            }
         }
+
+
 
         private void LoadComboBoxData()
         {
@@ -130,6 +152,44 @@ namespace VKRTalalaev.PageFolder
             NavigationService.Navigate(new EditCounterparty(OperationsDataGrid.SelectedItem as Counterparty));
         }
 
-        
+        private void LoadEllipseImage()
+        {
+            using (var context = DBEntities.GetContext())
+            {
+                var employer = context.Employer
+                                      .Where(e => e.IdUser == VariableClass.CurentUser)
+                                      .Select(e => e.Photo)
+                                      .FirstOrDefault();
+
+                if (employer != null)
+                {
+                    ImageBrush imageBrush = new ImageBrush();
+                    imageBrush.ImageSource = LoadImage(employer);
+                    MyElipse.Fill = imageBrush;
+                }
+                else
+                {
+                    MyElipse.Fill = new SolidColorBrush(Colors.Gray);
+                }
+            }
+        }
+
+        private BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+
+            BitmapImage image = new BitmapImage();
+            using (MemoryStream mem = new MemoryStream(imageData))
+            {
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
     }
+
 }
+

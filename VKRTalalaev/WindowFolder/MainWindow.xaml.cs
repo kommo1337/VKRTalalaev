@@ -40,5 +40,10 @@ namespace VKRTalalaev.WindowFolder
         {
             MainFrame.Navigate(new EmployerPage());
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Goodspage());
+        }
     }
 }

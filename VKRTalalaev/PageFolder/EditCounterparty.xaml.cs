@@ -40,7 +40,7 @@ namespace VKRTalalaev.PageFolder
 
         private void LoadComboBoxData()
         {
-            DBEntities.ResetContext(); // Сброс контекста перед созданием нового
+            DBEntities.ResetContext(); 
             using (var context = DBEntities.GetContext())
             {
                 AdresCb.ItemsSource = context.Adress.ToList();

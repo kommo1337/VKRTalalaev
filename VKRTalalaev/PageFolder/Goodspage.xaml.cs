@@ -16,20 +16,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VKRTalalaev.ClassFolder;
 using VKRTalalaev.DataFolder;
-using static MaterialDesignThemes.Wpf.Theme;
 
 namespace VKRTalalaev.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для EmployerPage.xaml
+    /// Логика взаимодействия для Goodspage.xaml
     /// </summary>
-    public partial class EmployerPage : Page
+    public partial class Goodspage : Page
     {
-        public EmployerPage()
+        public Goodspage()
         {
             InitializeComponent();
-            LoadComboBoxData();
             LoadDataGridData();
+            LoadComboBoxData();
             LoadEllipseImage();
             DBEntities.ResetContext();
             using (var context = DBEntities.GetContext())
@@ -49,57 +48,41 @@ namespace VKRTalalaev.PageFolder
                 }
             }
         }
-
         private void LoadComboBoxData()
         {
-            try
-            {
-                DBEntities.ResetContext();
-                using (var context = DBEntities.GetContext())
-                {
-                    var fullNames = context.Employer
-                                          .Select(e => e.Surname + " " + e.Name + " " + e.Therdname)
-                   .ToList();
-
-                    NazvanieCMB.ItemsSource = fullNames;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
-            DBEntities.ResetContext();
-            DataCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Phone).Distinct().ToList();
-            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.IdGender).Distinct().ToList();
-            StatusCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Email).Distinct().ToList();
+            NazvanieCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.Name).Distinct().ToList();
+            ArticulCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.Articul).Distinct().ToList();
+            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.IdCounterparty).Distinct().ToList();
+            PriceCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.Price).Distinct().ToList();
         }
 
         private void LoadDataGridData()
         {
-            var operations = DBEntities.GetContext().Employer.AsQueryable();
+            DBEntities.ResetContext();
+            var operations = DBEntities.GetContext().Goods.AsQueryable();
 
             if (NazvanieCMB.SelectedItem != null)
             {
                 string selectedName = NazvanieCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.Name == selectedName); //TODO посик по ФИО
+                operations = operations.Where(o => o.Name == selectedName);
             }
 
-            if (DataCMB.SelectedItem != null)
+            if (ArticulCMB.SelectedItem != null)
             {
-                string selectedData = DataCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.Phone == selectedData);
+                string selectedData = ArticulCMB.SelectedItem.ToString();
+                operations = operations.Where(o => o.Articul == selectedData);
             }
 
             if (CounterpartyCMB.SelectedItem != null)
             {
                 int selectedCounterparty = (int)CounterpartyCMB.SelectedItem;
-                operations = operations.Where(o => o.IdGender == selectedCounterparty);
+                operations = operations.Where(o => o.IdCounterparty == selectedCounterparty);
             }
 
-            if (StatusCMB.SelectedItem != null)
+            if (PriceCMB.SelectedItem != null)
             {
-                string selectedStatus = StatusCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.Email == selectedStatus);
+                int selectedStatus = (int)PriceCMB.SelectedItem;
+                operations = operations.Where(o => o.Price == selectedStatus);
             }
 
             OperationsDataGrid.ItemsSource = operations.ToList();
@@ -112,9 +95,9 @@ namespace VKRTalalaev.PageFolder
         private void ResetFilters_Click(object sender, RoutedEventArgs e)
         {
             NazvanieCMB.SelectedItem = null;
-            DataCMB.SelectedItem = null;
+            PriceCMB.SelectedItem = null;
             CounterpartyCMB.SelectedItem = null;
-            StatusCMB.SelectedItem = null;
+            ArticulCMB.SelectedItem = null;
 
             LoadDataGridData();
         }
@@ -122,7 +105,7 @@ namespace VKRTalalaev.PageFolder
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTb.Text.ToLower();
-            var customers = DBEntities.GetContext().Employer.ToList();
+            var customers = DBEntities.GetContext().Goods.ToList();
             var filteredCustomers = customers.Where(customer =>
             {
                 foreach (PropertyInfo property in customer.GetType().GetProperties())
@@ -151,17 +134,17 @@ namespace VKRTalalaev.PageFolder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddEmployerPage());
+            NavigationService.Navigate(new AddGoods());
         }
 
         private void modifyIt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditEmployer(OperationsDataGrid.SelectedItem as Employer));
+            NavigationService.Navigate(new EditGoods(OperationsDataGrid.SelectedItem as Goods));
         }
 
         private void FullInfo_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new FullInfoEmployer(OperationsDataGrid.SelectedItem as Employer));
+
         }
 
         private void LoadEllipseImage()

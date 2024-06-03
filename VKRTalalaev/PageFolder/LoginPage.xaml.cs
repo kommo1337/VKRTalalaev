@@ -35,7 +35,7 @@ namespace VKRTalalaev.PageFolder
             try
             {
                 string hashedPassword = ComputeSha256Hash(PasswordTb.Password);
-
+                DBEntities.ResetContext();
                 var user = DBEntities.GetContext().User
                     .FirstOrDefault(u => u.Login == LoginTB.Text && u.PasswordHash == hashedPassword && !u.IsBanned);
 
@@ -43,7 +43,7 @@ namespace VKRTalalaev.PageFolder
                 {
                     MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
                     new MainWindow().Show();
-
+                    VariableClass.CurentUser = user.IdUser;
                     foreach (Window window in Application.Current.Windows)
                     {
                         if (window is Window && window.Title == "Autorisation")

@@ -47,13 +47,13 @@
              BorderThickness="0" TextChanged="SearchTb_TextChanged"/>
             </Border>
 
-            <TextBlock Text="Дмитрий Талалаев" Margin="90 0 0 0" Width="60" TextWrapping="Wrap" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
-            <TextBlock Text="⌵" Foreground="WhiteSmoke" VerticalAlignment="Center" Height="19" />
-            <StackPanel Margin="40 0 0 0">
-                <Ellipse Width="40" Height="40" Fill="Aqua">
+            <TextBlock Text="" x:Name="NameUserTb" Margin="90 0 0 0" Width="60" TextWrapping="Wrap" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
+            
+            <StackPanel Margin="40 0 0 0" Width="66">
+                <Ellipse Width="40" Height="40" Name="MyElipse">
 
                 </Ellipse>
-                <TextBlock Text="Ваша подпись" HorizontalAlignment="Center" />
+                
             </StackPanel>
         </StackPanel>
 
