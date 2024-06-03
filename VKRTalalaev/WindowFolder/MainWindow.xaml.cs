@@ -45,5 +45,10 @@ namespace VKRTalalaev.WindowFolder
         {
             MainFrame.Navigate(new Goodspage());
         }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
     }
 }
