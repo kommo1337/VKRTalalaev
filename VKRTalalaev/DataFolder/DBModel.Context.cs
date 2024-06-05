@@ -22,6 +22,7 @@ namespace VKRTalalaev.DataFolder
 
         public static DBEntities GetContext()
         {
+            ResetContext();
             if (context == null)
             {
                 context = new DBEntities();

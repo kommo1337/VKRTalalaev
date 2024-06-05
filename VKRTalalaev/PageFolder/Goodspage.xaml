@@ -69,6 +69,15 @@
         <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
             <Grid>
                 <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  IsReadOnly="False" Background="{x:Null}"  Foreground="White">
+                    <DataGrid.Resources>
+                        <!-- Стиль для заголовков столбцов -->
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+
+                        </Style>
+                    </DataGrid.Resources>
+
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Редактировать" x:Name="modifyIt" Click="modifyIt_Click"/>

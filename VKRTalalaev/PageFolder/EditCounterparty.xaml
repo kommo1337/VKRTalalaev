@@ -9,7 +9,35 @@
   mc:Ignorable="d" 
   d:DesignHeight="420" d:DesignWidth="685"
   Title="AddOperationPage" Background="#FF242A3A">
-
+    <Page.Resources>
+        <!-- Define a style for ComboBoxItem -->
+        <Style x:Key="CustomComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="3"/>
+            <!-- Increase margin between items -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Grid>
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="False">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                    <!-- Remove highlight on hover -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <!-- Define the rows and columns of the Grid -->
         <Grid.RowDefinitions>
@@ -53,13 +81,13 @@
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="ОГРН" x:Name="OgrnipTb" 
      Foreground="White" BorderBrush="LightGray" Text="{Binding OGRN}"/>
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Адрес" x:Name="AdresCb" 
-               BorderBrush="LightGray"
-                    ItemsSource="{Binding Adress}" 
-      SelectedValue="{Binding Path=IdAdress}" 
-      SelectedValuePath="IdAdress">
+         BorderBrush="LightGray" Padding="3" Foreground="White"
+              ItemsSource="{Binding Adress}" 
+SelectedValue="{Binding Path=IdAdress}" 
+SelectedValuePath="IdAdress" materialDesign:ThemeAssist.Theme="Dark">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
+                        <TextBlock >
                             <TextBlock.Text>
                                 <MultiBinding StringFormat="{}{0}, {1}, {2}, {3}">
                                     <Binding Path="City.CityName" />

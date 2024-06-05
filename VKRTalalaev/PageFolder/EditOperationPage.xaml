@@ -8,7 +8,35 @@
       mc:Ignorable="d" 
       d:DesignHeight="420" d:DesignWidth="685"
       Title="AddOperationPage" Background="#FF242A3A">
-
+    <Page.Resources>
+        <!-- Define a style for ComboBoxItem -->
+        <Style x:Key="CustomComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="3"/>
+            <!-- Increase margin between items -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Grid>
+                            <ContentPresenter />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="False">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                    <!-- Remove highlight on hover -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
     <Grid>
         <!-- Define the rows and columns of the Grid -->
         <Grid.RowDefinitions>
@@ -39,45 +67,106 @@
 
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Тип операции" Name="TypeOperationCB"
-                       BorderBrush="LightGray"
-                      ItemsSource="{Binding TypeOfOperation}" DisplayMemberPath="TypeName"
-                SelectedValuePath="IdTypeOfOperation"
-                SelectedValue="{Binding Path=IdTypeOfOperation}"
-                      />
+            <ComboBox Margin="15" Width="178" Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Тип операции" materialDesign:ThemeAssist.Theme="Dark"
+  Foreground="White"
+  x:Name="TypeOperationCB" 
+  BorderBrush="LightGray"
+  ItemsSource="{Binding Counterparty}" 
+  
+  SelectedValuePath="IdCounterparty"
+  SelectedValue="{Binding Path=IdCounterparty}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding CounterpartyName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название операции" x:Name="NameOperationTb" 
                      Foreground="White" BorderBrush="LightGray" Text="{Binding NameOperation}"/>
 
-            <DatePicker Style="{StaticResource MaterialDesignDatePicker}" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
+            <DatePicker  Foreground="White" Style="{StaticResource MaterialDesignDatePicker}" materialDesign:ThemeAssist.Theme="Dark" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Контрагент" x:Name="CounterpartyCb" 
-                       BorderBrush="LightGray"
-                      ItemsSource="{Binding Counterparty}" DisplayMemberPath="CounterpartyName"
-                SelectedValuePath="IdCounterparty"
-                SelectedValue="{Binding Path=IdCounterparty}"/>
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Статус" x:Name="StatusCb" 
-                       BorderBrush="LightGray"
-                            ItemsSource="{Binding Status}" DisplayMemberPath="StatusName"
-                            SelectedValuePath="IdStatus"
-                            SelectedValue="{Binding Path=IdStatus}"/>
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Проект" x:Name="ProjectCb" 
-                       BorderBrush="LightGray"     
-                      ItemsSource="{Binding Project}" DisplayMemberPath="ProjectName"
-                        SelectedValuePath="IdProject"
-                        SelectedValue="{Binding Path=IdProject}"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Контрагент" 
+  Foreground="White"
+  x:Name="CounterpartyCb" materialDesign:ThemeAssist.Theme="Dark"
+  BorderBrush="LightGray"
+  ItemsSource="{Binding Counterparty}" 
+  
+  SelectedValuePath="IdCounterparty"
+  SelectedValue="{Binding Path=IdCounterparty}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding CounterpartyName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Статус" 
+  Foreground="White" materialDesign:ThemeAssist.Theme="Dark"
+  x:Name="StatusCb" 
+  BorderBrush="LightGray"
+  ItemsSource="{Binding Status}" 
+  
+  SelectedValuePath="IdStatus"
+  SelectedValue="{Binding Path=IdStatus}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding StatusName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Проект" 
+  Foreground="White" materialDesign:ThemeAssist.Theme="Dark"
+  x:Name="ProjectCb" 
+  BorderBrush="LightGray"
+  ItemsSource="{Binding Project}" 
+  
+  SelectedValuePath="IdProject"
+  SelectedValue="{Binding Path=IdProject}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ProjectName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Тип" x:Name="TypeCb"
-                      BorderBrush="LightGray"
-                            ItemsSource="{Binding Type}" DisplayMemberPath="Name"
-        SelectedValuePath="IdType"
-                SelectedValue="{Binding Path=IdType}"/>
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Материалы" x:Name="GoodsCb" 
-                      BorderBrush="LightGray"      ItemsSource="{Binding Goods}" DisplayMemberPath="Name"
-                SelectedValuePath="IdGoods"
-                    SelectedValue="{Binding Path=IdGoods}"/>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Тип" 
+Foreground="White"
+  x:Name="TypeCb" materialDesign:ThemeAssist.Theme="Dark"
+  BorderBrush="LightGray"
+  ItemsSource="{Binding Type}" 
+  
+  SelectedValuePath="IdType"
+  SelectedValue="{Binding Path=IdType}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Материалы" 
+ Foreground="White"
+  x:Name="GoodsCb" 
+                      materialDesign:ThemeAssist.Theme="Dark"
+  BorderBrush="LightGray"
+  ItemsSource="{Binding Goods}" 
+  
+  SelectedValuePath="IdGoods"
+  SelectedValue="{Binding Path=IdGoods}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
         </StackPanel>
 

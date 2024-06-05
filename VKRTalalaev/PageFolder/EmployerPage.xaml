@@ -69,7 +69,16 @@
         </Separator>
         <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
             <Grid>
-                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  IsReadOnly="False" Background="{x:Null}"  Foreground="White">
+                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"   IsReadOnly="False" Background="{x:Null}"  Foreground="White">
+                    <DataGrid.Resources>
+                        <!-- Стиль для заголовков столбцов -->
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            
+                        </Style>
+                    </DataGrid.Resources>
+
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Редактировать" x:Name="modifyIt" Click="modifyIt_Click"/>
@@ -113,7 +122,7 @@
                 <StackPanel Orientation="Vertical"  Grid.Row="1" Margin="0 0 3 0">
                     <TextBlock Text="ФИО" Foreground="White" FontSize="10"/>
                     <ComboBox x:Name="NazvanieCMB" Style="{StaticResource MaterialDesignComboBox}"
-                              BorderBrush="LightGray" Height="19" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged" />
+                              BorderBrush="LightGray" Height="19" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged"/>
                     <TextBlock Text="Телефон" Foreground="White" FontSize="10"/>
                     <ComboBox x:Name="DataCMB" Style="{StaticResource MaterialDesignComboBox}"
           BorderBrush="LightGray" Height="19" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>
