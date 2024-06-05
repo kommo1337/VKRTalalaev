@@ -33,8 +33,7 @@ namespace VKRTalalaev.PageFolder
         {
             InitializeComponent();
             DBEntities.ResetContext();
-            OperationsDataGrid.ItemsSource = DBEntities.GetContext().Counterparty.
-            ToList().OrderBy(u => u.IdCounterparty);
+            LoadDataGridData();
             DBEntities.ResetContext();
             LoadComboBoxData();
             LoadEllipseImage();
@@ -95,7 +94,7 @@ namespace VKRTalalaev.PageFolder
                 operations = operations.Where(o => o.FinancialAccaunt == selectedStatus);
             }
 
-            OperationsDataGrid.ItemsSource = operations.ToList();
+            ListBox_Resource.ItemsSource = operations.ToList();
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -129,7 +128,7 @@ namespace VKRTalalaev.PageFolder
                 return false;
             }).OrderBy(u => u.CounterpartyName).ToList();
 
-            OperationsDataGrid.ItemsSource = filteredCustomers;
+            ListBox_Resource.ItemsSource = filteredCustomers;
 
             if (filteredCustomers.Count <= 0)
             {
@@ -149,7 +148,7 @@ namespace VKRTalalaev.PageFolder
 
         private void modifyIt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditCounterparty(OperationsDataGrid.SelectedItem as Counterparty));
+            NavigationService.Navigate(new EditCounterparty(ListBox_Resource.SelectedItem as Counterparty));
         }
 
         private void LoadEllipseImage()
@@ -188,6 +187,29 @@ namespace VKRTalalaev.PageFolder
             }
             image.Freeze();
             return image;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditCounterparty(ListBox_Resource.SelectedItem as Counterparty));
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            //NavigationService.Navigate(new FullInfoEmployer(ListBox_Resource.SelectedItem as Employer));
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListBox_Resource_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            if (ListBox_Resource.SelectedItem is null)
+                ListBox_Resource_ContextMenu.Visibility = Visibility.Hidden;
+            else
+                ListBox_Resource_ContextMenu.Visibility = Visibility.Visible;
         }
     }
 

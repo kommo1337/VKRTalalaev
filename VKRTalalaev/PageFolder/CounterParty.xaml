@@ -27,11 +27,8 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
-            <TextBlock Text="Контрагенты" Style="{StaticResource HeaderStyle}" FontFamily="Segoe UI Black"/>
-            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}" Text="334" Width="145"
-                       Margin="15 0 0 0" Height="31" x:Name="DatePeriudCB" Background="#7F484848" BorderBrush="Gray"
-                      materialDesign:HintAssist.Hint="Дата"/>
-            <Icon:PackIconMaterial Kind="TextBoxSearch" Style="{StaticResource menuButtonIcon}" Margin="70 0 0 0" Foreground="WhiteSmoke"/>
+            <TextBlock Text="Контрагенты" Style="{StaticResource HeaderStyle}" FontFamily="Segoe UI Black" FontSize="30"/>
+            <Icon:PackIconMaterial Kind="TextBoxSearch" Style="{StaticResource menuButtonIcon}" Margin="135 0 0 0" Foreground="WhiteSmoke"/>
             <Border BorderBrush="Gray" 
             BorderThickness="1" 
             Background="#7F484848" 
@@ -40,20 +37,20 @@
             Height="31" 
             Margin="10 0 0 0">
                 <TextBox x:Name="SearchTb" 
-             Style="{StaticResource MaterialDesignTextBox}" 
-             materialDesign:HintAssist.Hint="Поиск"
-                         materialDesign:HintAssist.Foreground="WhiteSmoke"
-             Background="Transparent" 
-             BorderThickness="0" TextChanged="SearchTb_TextChanged"/>
+Style="{StaticResource MaterialDesignTextBox}" 
+materialDesign:HintAssist.Hint="Поиск" 
+            materialDesign:HintAssist.Foreground="WhiteSmoke"
+Background="Transparent" Foreground="white" 
+BorderThickness="0" TextChanged="SearchTb_TextChanged" Margin="6,2,0,0" />
             </Border>
 
-            <TextBlock Text="" x:Name="NameUserTb" Margin="90 0 0 0" Width="60" TextWrapping="Wrap" Foreground="WhiteSmoke" VerticalAlignment="Center"/>
-            <TextBlock Text="⌵" Foreground="WhiteSmoke" VerticalAlignment="Center" Height="19" />
-            <StackPanel Margin="40 0 0 0">
-                <Ellipse Width="40" Height="40" Name="MyElipse">
-                    
+            <TextBlock Text="" x:Name="NameUserTb" Margin="190 0 0 0" Width="60" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
+
+            <StackPanel Margin="19 0 0 0"  Height="39">
+                <Ellipse Width="40" Height="40" Name="MyElipse" VerticalAlignment="Top">
+
                 </Ellipse>
-                
+
             </StackPanel>
         </StackPanel>
 
@@ -69,32 +66,72 @@
         </Separator>
         <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
             <Grid>
-                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  Background="{x:Null}"  Foreground="White">
-                    <DataGrid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Полная информация" x:Name="modifyIt" Click="modifyIt_Click"/>
+                <ListBox x:Name="ListBox_Resource"
+ItemsSource="{Binding Counterparty}"
+Grid.Column="0"
+Margin="15,30,15,0"
+Height="539"
+Background="Transparent"
+Foreground="White"
+FontWeight="DemiBold"
+ScrollViewer.VerticalScrollBarVisibility="Hidden"
+VerticalAlignment="Top"
+                
+ContextMenuOpening="ListBox_Resource_ContextMenuOpening">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3"
+                VerticalAlignment="Top"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="250"
+           Height="200"
+           
+           BorderBrush="#FF3F507D"
+           BorderThickness="1"
+           HorizontalAlignment="Center"
+           VerticalAlignment="Center">
+                                <StackPanel Background="{x:Null}">
+                                    <Border Width ="250"
+                   Height="150">
+                                        <Image Source="{Binding PasportPhoto}"
+                      Width="250"
+                      Height="160"
+                      Margin="5,5,5,5"
+                      VerticalAlignment="Top"/>
+                                    </Border>
+                                    <TextBlock TextAlignment="Center"
+                      TextWrapping="Wrap"
+                      Text="{Binding CounterpartyName}"
+                      FontSize="14"
+                      Margin="5,5,5,0"
+                      VerticalAlignment="Top"/>
+                                    <TextBlock TextAlignment="Center"
+                      TextWrapping="Wrap"
+                      Text="{Binding INN}"
+                      FontSize="14"
+                      FontStyle="Italic"
+                      Margin="5,3,5,5"
+                      VerticalAlignment="Top"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ListBox.ContextMenu>
+                        <ContextMenu x:Name="ListBox_Resource_ContextMenu"
+            Background="#5670A5"
+            Foreground="White">
+                            <MenuItem Header="Редактирование контрагента"
+             Click="MenuItem_Click"/>
+                            <MenuItem Header="Информация о контрагенте"
+             Click="MenuItem_Click_1"/>
+                            <MenuItem Header="Удалить контрагента"
+             Click="MenuItem_Click_2"/>
                         </ContextMenu>
-                    </DataGrid.ContextMenu>
-                    <DataGrid.Columns >
-                        <DataGridTextColumn Header="№"
-                                    Binding="{Binding IdCounterparty}"
-                                    Width="50" Foreground="White"/>
-
-                        <DataGridTextColumn Header="Название"
-                                    Binding="{Binding CounterpartyName}"
-                                    Width="*" Foreground="White"/>
-                        <DataGridTextColumn Header="Инн"
-                                    Binding="{Binding INN}"
-                                    Width="*" />
-                        <DataGridTextColumn Header="КПП"
-                                    Binding="{Binding KPP}"
-                                    Width="*" />
-                        <DataGridTextColumn Header="Номер счета"
-                                    Binding="{Binding FinancialAccaunt}"
-                                    Width="*" />
-
-                    </DataGrid.Columns>
-                </DataGrid>
+                    </ListBox.ContextMenu>
+                </ListBox>
             </Grid>
         </Border>
 
@@ -110,23 +147,27 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Vertical"  Grid.Row="1" Margin="0 0 3 0">
-                    <TextBlock Text="Название" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="NazvanieCMB" Style="{StaticResource MaterialDesignComboBox}"
-                              BorderBrush="LightGray" Height="19" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged" />
-                    <TextBlock Text="Инн" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="DataCMB" Style="{StaticResource MaterialDesignComboBox}"
-          BorderBrush="LightGray" Height="19" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>
-                    <TextBlock Text="КПП" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="CounterpartyCMB" Style="{StaticResource MaterialDesignComboBox}"
-          BorderBrush="LightGray" Height="19"  SelectionChanged="CMB_SelectionChanged" 
+                    <TextBlock Text="Название" Foreground="White" FontSize="13"/>
+                    <ComboBox x:Name="NazvanieCMB" materialDesign:ThemeAssist.Theme="Dark"
+Foreground="White" Style="{StaticResource MaterialDesignComboBox}"
+                              BorderBrush="LightGray" Height="30" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged" />
+                    <TextBlock Text="Инн" Foreground="White" FontSize="13"/>
+                    <ComboBox x:Name="DataCMB" materialDesign:ThemeAssist.Theme="Dark"
+Foreground="White" Style="{StaticResource MaterialDesignComboBox}"
+          BorderBrush="LightGray" Height="30" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>
+                    <TextBlock Text="КПП" Foreground="White" FontSize="13"/>
+                    <ComboBox x:Name="CounterpartyCMB" materialDesign:ThemeAssist.Theme="Dark"
+Foreground="White"  Style="{StaticResource MaterialDesignComboBox}"
+          BorderBrush="LightGray" Height="30"  SelectionChanged="CMB_SelectionChanged" 
                     />
                 </StackPanel>
 
 
                 <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="2,0,0,89">
-                    <TextBlock Text="Номер счета" Foreground="White" FontSize="10"/>
-                    <ComboBox x:Name="StatusCMB" Style="{StaticResource MaterialDesignComboBox}"
-                        BorderBrush="LightGray" Height="19" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged"/>
+                    <TextBlock Text="Номер счета" Foreground="White" FontSize="13"/>
+                    <ComboBox x:Name="StatusCMB" materialDesign:ThemeAssist.Theme="Dark"
+Foreground="White" Style="{StaticResource MaterialDesignComboBox}"
+                        BorderBrush="LightGray" Height="30" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged"/>
                 </StackPanel>
                 <Button Grid.Column="1" Content="Сбросить " Click="ResetFilters_Click" HorizontalAlignment="Center" Margin="0,65,0,0" Grid.Row="1" VerticalAlignment="Top" Width="132"/>
                 <Button Grid.Column="1" Content="Добавить" HorizontalAlignment="Center" Margin="0,138,0,0" Grid.Row="1" VerticalAlignment="Top" Width="132" Click="Button_Click"/>

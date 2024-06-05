@@ -59,7 +59,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
                    Text="Редактирование операции" 
-                   FontSize="24" 
+                   FontSize="32" 
                    FontWeight="Bold" 
                    HorizontalAlignment="Center" 
                    Margin="10"
@@ -67,7 +67,7 @@
 
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="178" Style="{StaticResource MaterialDesignComboBox}" 
+            <ComboBox Margin="15" Height="40" FontSize="15" Width="178" Style="{StaticResource MaterialDesignComboBox}" 
   materialDesign:HintAssist.Hint="Тип операции" materialDesign:ThemeAssist.Theme="Dark"
   Foreground="White"
   x:Name="TypeOperationCB" 
@@ -82,14 +82,14 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название операции" x:Name="NameOperationTb" 
+            <TextBox Margin="15" Height="40" FontSize="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название операции" x:Name="NameOperationTb" 
                      Foreground="White" BorderBrush="LightGray" Text="{Binding NameOperation}"/>
 
-            <DatePicker  Foreground="White" Style="{StaticResource MaterialDesignDatePicker}" materialDesign:ThemeAssist.Theme="Dark" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
+            <DatePicker  Foreground="White" Height="40" FontSize="15" Style="{StaticResource MaterialDesignDatePicker}" materialDesign:ThemeAssist.Theme="Dark" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+            <ComboBox Margin="15" Width="200" Height="40" FontSize="15" Style="{StaticResource MaterialDesignComboBox}" 
   materialDesign:HintAssist.Hint="Контрагент" 
   Foreground="White"
   x:Name="CounterpartyCb" materialDesign:ThemeAssist.Theme="Dark"
@@ -104,7 +104,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+            <ComboBox Margin="15" Width="200" Height="40" FontSize="15" Style="{StaticResource MaterialDesignComboBox}" 
   materialDesign:HintAssist.Hint="Статус" 
   Foreground="White" materialDesign:ThemeAssist.Theme="Dark"
   x:Name="StatusCb" 
@@ -120,7 +120,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
-  materialDesign:HintAssist.Hint="Проект" 
+  materialDesign:HintAssist.Hint="Проект" Height="40" FontSize="15"
   Foreground="White" materialDesign:ThemeAssist.Theme="Dark"
   x:Name="ProjectCb" 
   BorderBrush="LightGray"
@@ -136,7 +136,7 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+            <ComboBox Margin="15" Width="200" Height="40" FontSize="15" Style="{StaticResource MaterialDesignComboBox}" 
   materialDesign:HintAssist.Hint="Тип" 
 Foreground="White"
   x:Name="TypeCb" materialDesign:ThemeAssist.Theme="Dark"
@@ -152,7 +152,7 @@ Foreground="White"
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
-  materialDesign:HintAssist.Hint="Материалы" 
+  materialDesign:HintAssist.Hint="Материалы" Height="40" FontSize="15"
  Foreground="White"
   x:Name="GoodsCb" 
                       materialDesign:ThemeAssist.Theme="Dark"

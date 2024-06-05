@@ -69,21 +69,21 @@
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название контрагента" x:Name="CounterPartyNameTb" 
-     Foreground="White" BorderBrush="LightGray" Text="{Binding CounterpartyName}"/>
+     Foreground="White" BorderBrush="LightGray" Text="{Binding CounterpartyName}" Height="40" FontSize="15"/>
             <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="ИНН" x:Name="NameOperationTb" 
-             Foreground="White" BorderBrush="LightGray" Text="{Binding INN}"/>
+             Foreground="White" BorderBrush="LightGray" Text="{Binding INN}" Height="40" FontSize="15"/>
 
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="КПП" x:Name="KPPTb" 
-     Foreground="White" BorderBrush="LightGray" Text="{Binding KPP}"/>
+     Foreground="White" BorderBrush="LightGray" Text="{Binding KPP}" Height="40" FontSize="15"/>
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="ОГРН" x:Name="OgrnipTb" 
-     Foreground="White" BorderBrush="LightGray" Text="{Binding OGRN}"/>
+     Foreground="White" BorderBrush="LightGray" Text="{Binding OGRN}" Height="40" FontSize="15"/>
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Адрес" x:Name="AdresCb" 
          BorderBrush="LightGray" Padding="3" Foreground="White"
               ItemsSource="{Binding Adress}" 
-SelectedValue="{Binding Path=IdAdress}" 
+SelectedValue="{Binding Path=IdAdress}"  Height="40" FontSize="15"
 SelectedValuePath="IdAdress" materialDesign:ThemeAssist.Theme="Dark">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -101,13 +101,13 @@ SelectedValuePath="IdAdress" materialDesign:ThemeAssist.Theme="Dark">
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Номер счета" x:Name="FinAccTb" 
-     Foreground="White" BorderBrush="LightGray" Text="{Binding FinancialAccaunt}"/>
+     Foreground="White" BorderBrush="LightGray" Text="{Binding FinancialAccaunt}" Height="40" FontSize="15" />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10,0,10,0" VerticalAlignment="Center" >
 
             <Image x:Name="PhotoIMG"
-   Width="150"
-   Height="130" 
+   Width="190"
+   Height="170" 
                Margin="10"/>
             <Button Content="Добавить фото" Click="Button_Click"/>
 

@@ -59,7 +59,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
                Text="Редактирование товара" 
-               FontSize="24" 
+               FontSize="32" 
                FontWeight="Bold" 
                HorizontalAlignment="Center" 
                Margin="10"
@@ -69,14 +69,14 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название" x:Name="NameTb" 
-         Foreground="White" BorderBrush="LightGray" Text="{Binding Name}"/>
-            <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Артикул" x:Name="ArticulTb" 
+            <TextBox Margin="15" Width="200" Height="40" FontSize="15" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название" x:Name="NameTb" 
+         Foreground="White" BorderBrush="LightGray" Text="{Binding Name}" />
+            <TextBox Margin="15" Height="40" FontSize="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Артикул" x:Name="ArticulTb" 
                  Foreground="White" BorderBrush="LightGray" Text="{Binding Articul}"/>
 
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Цена" x:Name="PriceTb" 
+            <TextBox Margin="15" Width="200" Height="40" FontSize="15" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Цена" x:Name="PriceTb" 
          Foreground="White" BorderBrush="LightGray" Text="{Binding Price}"/>
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Контрагент" x:Name="CounterpartyCb" 
+            <ComboBox Margin="15" Width="200" Height="40" FontSize="15" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Контрагент" x:Name="CounterpartyCb" 
        BorderBrush="LightGray" materialDesign:ThemeAssist.Theme="Dark"
       ItemsSource="{Binding Counterparty}" 
 SelectedValuePath="IdCounterparty"

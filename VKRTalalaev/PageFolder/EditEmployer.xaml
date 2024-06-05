@@ -69,23 +69,23 @@
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Имя" x:Name="NameTb" 
-         Foreground="White" BorderBrush="LightGray" Text="{Binding Name}"/>
+         Foreground="White" BorderBrush="LightGray" Text="{Binding Name}" Height="40" FontSize="15" />
             <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Фамилия" x:Name="SurnameTb" 
-                 Foreground="White" BorderBrush="LightGray" Text="{Binding Surname}"/>
+                 Foreground="White" BorderBrush="LightGray" Text="{Binding Surname}" Height="40" FontSize="15"/>
 
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Отчество" x:Name="TherdnameTb" 
-         Foreground="White" BorderBrush="LightGray" Text="{Binding Therdname}"/>
+         Foreground="White" BorderBrush="LightGray" Text="{Binding Therdname}" Height="40" FontSize="15"/>
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Телефон" x:Name="PhoneTb" 
-Foreground="White" BorderBrush="LightGray" Text="{Binding Phone}"/>
+Foreground="White" BorderBrush="LightGray" Text="{Binding Phone}" Height="40" FontSize="15"/>
 
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Почта" x:Name="EmailTb" 
-         Foreground="White" BorderBrush="LightGray" Text="{Binding Email}"/>
+         Foreground="White" BorderBrush="LightGray" Text="{Binding Email}" Height="40" FontSize="15"/>
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Адрес" x:Name="AdresCb" 
          BorderBrush="LightGray" Padding="3" Foreground="White"
-              ItemsSource="{Binding Adress}"  materialDesign:ThemeAssist.Theme="Dark"
+              ItemsSource="{Binding Adress}" Height="40" FontSize="15" materialDesign:ThemeAssist.Theme="Dark"
 SelectedValue="{Binding Path=IdAdress}" 
 SelectedValuePath="IdAdress">
                 <ComboBox.ItemTemplate>
@@ -106,7 +106,7 @@ SelectedValuePath="IdAdress">
 
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Гендер" x:Name="GenderCb" 
 BorderBrush="LightGray" Foreground="White" materialDesign:ThemeAssist.Theme="Dark"
-     ItemsSource="{Binding Gender}" 
+     ItemsSource="{Binding Gender}" Height="40" FontSize="15"
      SelectedValuePath="IdGender"
      SelectedValue="{Binding Path=IdGender}">
                 <ComboBox.ItemTemplate>
@@ -118,7 +118,7 @@ BorderBrush="LightGray" Foreground="White" materialDesign:ThemeAssist.Theme="Dar
 
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Пользователь" x:Name="UserCb" 
 BorderBrush="LightGray"
-     ItemsSource="{Binding User}" 
+     ItemsSource="{Binding User}" Height="40" FontSize="15"
      SelectedValuePath="IdUser"
      SelectedValue="{Binding Path=IdUser}" Foreground="White" materialDesign:ThemeAssist.Theme="Dark">
                 <ComboBox.ItemTemplate>
@@ -131,8 +131,8 @@ BorderBrush="LightGray"
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10,0,10,0" VerticalAlignment="Center" >
 
             <Image x:Name="PhotoIMG"
-       Width="150"
-       Height="130" 
+       Width="190"
+       Height="170" 
                    Margin="10"/>
             <Button Content="Добавить фото" Name="PhotoBTN" Click="PhotoBTN_Click" />
             <Button Content="Добавить паспорт" Name="PasportBTN" Margin="0 5" Click="PasportBTN_Click"/>

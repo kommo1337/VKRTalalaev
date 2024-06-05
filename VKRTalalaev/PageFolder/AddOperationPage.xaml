@@ -59,7 +59,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
                Text="Добавление операции" 
-               FontSize="24" 
+               FontSize="32" 
                FontWeight="Bold" 
                HorizontalAlignment="Center" 
                Margin="10"
@@ -67,10 +67,41 @@
 
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="178" Style="{StaticResource MaterialDesignComboBox}" 
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
               materialDesign:HintAssist.Hint="Тип операции" 
               Foreground="White"
               x:Name="TypeOperationCB" 
+              BorderBrush="LightGray"
+              ItemsSource="{Binding Counterparty}" 
+              materialDesign:ThemeAssist.Theme="Dark"
+              SelectedValuePath="IdTypeOfOperation"
+                      Height="40" FontSize="15"
+              SelectedValue="{Binding Path=IdTypeOfOperation}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding TypeName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" 
+             materialDesign:HintAssist.Hint="Название операции" 
+             Foreground="White" BorderBrush="LightGray" Height="40" FontSize="15"
+             x:Name="NameOpeonTb"/>
+
+            <DatePicker Style="{StaticResource MaterialDesignDatePicker}" 
+                x:Name="BTHDatePick" 
+                BorderBrush="White" Foreground="White" Width="179" 
+                materialDesign:HintAssist.Hint="Дата операции" Height="40" FontSize="15"
+                materialDesign:ThemeAssist.Theme="Dark"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
+            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+              materialDesign:HintAssist.Hint="Контрагент" 
+              Foreground="White"
+                      Height="40" FontSize="15"
+              x:Name="CounterpartyCb" 
               BorderBrush="LightGray"
               ItemsSource="{Binding Counterparty}" 
               materialDesign:ThemeAssist.Theme="Dark"
@@ -83,47 +114,20 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" 
-             materialDesign:HintAssist.Hint="Название операции" 
-             Foreground="White" BorderBrush="LightGray"
-             x:Name="NameOpeonTb"/>
-
-            <DatePicker Style="{StaticResource MaterialDesignDatePicker}" 
-                x:Name="BTHDatePick" 
-                BorderBrush="White" Foreground="White" Width="179" 
-                materialDesign:HintAssist.Hint="Дата операции"
-                materialDesign:ThemeAssist.Theme="Dark"/>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
-              materialDesign:HintAssist.Hint="Контрагент" 
-              Foreground="White"
-              x:Name="CounterpartyCb" 
-              BorderBrush="LightGray"
-              ItemsSource="{Binding Counterparty}" 
-              materialDesign:ThemeAssist.Theme="Dark"
-              SelectedValuePath="IdCounterparty"
-              SelectedValue="{Binding Path=IdCounterparty}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding CounterpartyName}" Foreground="Black"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
               materialDesign:HintAssist.Hint="Статус" 
               Foreground="White"
               x:Name="StatusCb" 
+                      Height="40" FontSize="15"
               BorderBrush="LightGray"
+                      
               ItemsSource="{Binding Status}" 
               materialDesign:ThemeAssist.Theme="Dark"
               SelectedValuePath="IdStatus"
               SelectedValue="{Binding Path=IdStatus}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding StatusName}" />
+                        <TextBlock Text="{Binding StatusName}" Foreground="White"/>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
                 <ComboBox.ItemContainerStyle>
@@ -136,13 +140,14 @@
               Foreground="White"
               x:Name="ProjectCb" 
               BorderBrush="LightGray"
+                      Height="40" FontSize="15"
               ItemsSource="{Binding Project}" 
               materialDesign:ThemeAssist.Theme="Dark"
               SelectedValuePath="IdProject"
               SelectedValue="{Binding Path=IdProject}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding ProjectName}" Foreground="Black"/>
+                        <TextBlock Text="{Binding ProjectName}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -153,6 +158,7 @@
               materialDesign:HintAssist.Hint="Тип" 
             Foreground="White"
               x:Name="TypeCb"
+                      Height="40" FontSize="15"
               BorderBrush="LightGray"
               ItemsSource="{Binding Type}" 
               materialDesign:ThemeAssist.Theme="Dark"
@@ -160,7 +166,7 @@
               SelectedValue="{Binding Path=IdType}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" Foreground="Black"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -169,6 +175,7 @@
               materialDesign:HintAssist.Hint="Материалы" 
              Foreground="White"
               x:Name="GoodsCb" 
+                      Height="40" FontSize="15"
               BorderBrush="LightGray"
               ItemsSource="{Binding Goods}" 
               materialDesign:ThemeAssist.Theme="Dark"

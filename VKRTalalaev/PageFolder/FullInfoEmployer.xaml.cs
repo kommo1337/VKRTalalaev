@@ -34,7 +34,7 @@ namespace VKRTalalaev.PageFolder
             this.Emp = Emp;
             LoadCounterpartyPhoto(Emp.IdEmployer);
             LoadCounterpartyPhotoPasport(Emp.IdEmployer);
-            DisplayAddress(Emp.IdEmployer);
+            AdresTb.Text = GetFullAddress(Emp.IdAdress);
 
         }
 
@@ -47,7 +47,7 @@ namespace VKRTalalaev.PageFolder
 
         private void PhotoPasportBtn_Click(object sender, RoutedEventArgs e)
         {
-            PhotoPasport.Visibility = Visibility.Visible;
+            //PhotoPasport.Visibility = Visibility.Visible;
             
         }
 
@@ -120,21 +120,38 @@ namespace VKRTalalaev.PageFolder
             }
         }
 
-        private void DisplayAddress(int addressId) //TODO не воркает 
+        public static string GetFullAddress(int addressId)
         {
-            DBEntities.ResetContext();
+            
             using (var context = DBEntities.GetContext())
             {
-                var adress = context.Adress
-                    .Where(a => a.IdAdress == addressId) 
-                    .FirstOrDefault();
+                var address = context.Adress
+                                     .Where(a => a.IdAdress == addressId)
+                                     .Select(a => new
+                                     {
+                                         a.IdCity,
+                                         a.IdStreet,
+                                         a.House,
+                                         a.Appartment
+                                     })
+                                     .FirstOrDefault();
 
-                if (adress != null)
+                if (address == null)
                 {
-                    
-                    string adressFormat = $"{adress.IdCity}, {adress.IdStreet}, {adress.House}, {adress.Appartment}";
-                    AdresTb.Text = adressFormat;
+                    return "Address not found";
                 }
+
+                var city = context.City
+                                  .Where(c => c.IdCity == address.IdCity)
+                                  .Select(c => c.CityName)
+                                  .FirstOrDefault();
+
+                var street = context.Street
+                                    .Where(s => s.IdStreet == address.IdStreet)
+                                    .Select(s => s.StreetName)
+                                    .FirstOrDefault();
+
+                return $"{city}, улица {street}, дом {address.House}, квартира {address.Appartment}";
             }
         }
     }

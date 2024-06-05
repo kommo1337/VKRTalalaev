@@ -29,6 +29,7 @@ namespace VKRTalalaev.PageFolder
         {
             InitializeComponent();
             LoadComboBoxData();
+
             LoadDataGridData();
             LoadEllipseImage();
             DBEntities.ResetContext();
@@ -48,6 +49,7 @@ namespace VKRTalalaev.PageFolder
                     NameUserTb.Text = "User not found";
                 }
             }
+
         }
 
         private void LoadComboBoxData()
@@ -73,9 +75,10 @@ namespace VKRTalalaev.PageFolder
             CounterpartyCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.IdGender).Distinct().ToList();
             StatusCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Email).Distinct().ToList();
         }
-
+        
         private void LoadDataGridData()
         {
+            DBEntities.ResetContext();
             var operations = DBEntities.GetContext().Employer.AsQueryable();
 
             if (NazvanieCMB.SelectedItem != null)
@@ -102,8 +105,9 @@ namespace VKRTalalaev.PageFolder
                 operations = operations.Where(o => o.Email == selectedStatus);
             }
 
-            OperationsDataGrid.ItemsSource = operations.ToList();
+            ListBox_Resource.ItemsSource = operations.ToList();
         }
+
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -136,7 +140,7 @@ namespace VKRTalalaev.PageFolder
                 return false;
             }).OrderBy(u => u.Name).ToList();
 
-            OperationsDataGrid.ItemsSource = filteredCustomers;
+            ListBox_Resource.ItemsSource = filteredCustomers;
 
             if (filteredCustomers.Count <= 0)
             {
@@ -156,12 +160,12 @@ namespace VKRTalalaev.PageFolder
 
         private void modifyIt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditEmployer(OperationsDataGrid.SelectedItem as Employer));
+            NavigationService.Navigate(new EditEmployer(ListBox_Resource.SelectedItem as Employer));
         }
 
         private void FullInfo_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new FullInfoEmployer(OperationsDataGrid.SelectedItem as Employer));
+            NavigationService.Navigate(new FullInfoEmployer(ListBox_Resource.SelectedItem as Employer));
         }
 
         private void LoadEllipseImage()
@@ -200,6 +204,29 @@ namespace VKRTalalaev.PageFolder
             }
             image.Freeze();
             return image;
+        }
+
+        private void ListBox_Resource_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            if (ListBox_Resource.SelectedItem is null)
+                ListBox_Resource_ContextMenu.Visibility = Visibility.Hidden;
+            else
+                ListBox_Resource_ContextMenu.Visibility = Visibility.Visible;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new EditEmployer(ListBox_Resource.SelectedItem as Employer));
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new FullInfoEmployer(ListBox_Resource.SelectedItem as Employer));
+        }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -60,7 +60,7 @@
         <!-- Header -->
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3"
                Text="Добавление контрагента" 
-               FontSize="24" 
+               FontSize="32" 
                FontWeight="Bold" 
                HorizontalAlignment="Center" 
                Margin="10"
@@ -68,20 +68,20 @@
 
         <!-- StackPanels in columns -->
         <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название контрагента" x:Name="CounterPartyNameTb" 
+            <TextBox Margin="15" Width="182" Height="40" FontSize="15" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название контрагента" x:Name="CounterPartyNameTb" 
          Foreground="White" BorderBrush="LightGray"/>
-            <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="ИНН" x:Name="NameOperationTb" 
+            <TextBox Margin="15" Width="182" Height="40" FontSize="15" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="ИНН" x:Name="NameOperationTb" 
                  Foreground="White" BorderBrush="LightGray"/>
 
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="КПП" x:Name="KPPTb" 
+            <TextBox Margin="15" Width="182" Height="40" FontSize="15" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="КПП" x:Name="KPPTb" 
          Foreground="White" BorderBrush="LightGray"/>
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="ОГРН" x:Name="OgrnipTb" 
-         Foreground="White" BorderBrush="LightGray"/>
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Адрес" x:Name="AdresCb" 
-                   BorderBrush="LightGray" Padding="3" Foreground="White"
+         Foreground="White" BorderBrush="LightGray" Height="40" FontSize="15" />
+            <ComboBox Margin="15" Width="182" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Адрес" x:Name="AdresCb" 
+                   BorderBrush="LightGray" Padding="3" Foreground="White" Height="40" FontSize="15"
                         ItemsSource="{Binding Adress}" 
           SelectedValue="{Binding Path=IdAdress}" 
           SelectedValuePath="IdAdress"
@@ -102,7 +102,7 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Номер счета" x:Name="FinAccTb" 
-         Foreground="White" BorderBrush="LightGray"/>
+         Foreground="White" BorderBrush="LightGray " Height="40" FontSize="15"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10,0,10,0" VerticalAlignment="Center" >
 
