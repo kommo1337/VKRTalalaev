@@ -55,7 +55,18 @@ namespace VKRTalalaev.PageFolder
         {
             NazvanieCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.NameOperation).Distinct().ToList();
             DataCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.DateOperation).Distinct().ToList();
-            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdCounterParty).Distinct().ToList();
+            using (var context = DBEntities.GetContext())
+            {
+                CounterpartyCMB.ItemsSource = context.Operation
+                    .Join(context.Counterparty,
+                          o => o.IdCounterParty,
+                          c => c.IdCounterparty,
+                          (o, c) => c.CounterpartyName)
+                    .Distinct()
+                    .ToList();
+            }
+
+
             StatusCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdStatus).Distinct().ToList();
         }
 
@@ -77,8 +88,16 @@ namespace VKRTalalaev.PageFolder
 
             if (CounterpartyCMB.SelectedItem != null)
             {
-                int selectedCounterparty = (int)CounterpartyCMB.SelectedItem;
-                operations = operations.Where(o => o.IdCounterParty == selectedCounterparty);
+                string selectedCounterpartyName = (string)CounterpartyCMB.SelectedItem;
+                using (var context = DBEntities.GetContext())
+                {
+                    int selectedCounterpartyId = context.Counterparty
+                        .Where(c => c.CounterpartyName == selectedCounterpartyName)
+                        .Select(c => c.IdCounterparty)
+                        .FirstOrDefault();
+
+                    operations = operations.Where(o => o.IdCounterParty == selectedCounterpartyId);
+                }
             }
 
             if (StatusCMB.SelectedItem != null)

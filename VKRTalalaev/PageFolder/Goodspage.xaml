@@ -65,7 +65,7 @@ BorderThickness="0" TextChanged="SearchTb_TextChanged" Margin="6,2,0,0" />
         </Separator>
         <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
             <Grid>
-                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  IsReadOnly="False" Background="{x:Null}"  Foreground="White" >
+                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  IsReadOnly="False" Background="{x:Null}"  Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <DataGrid.Resources>
                         <!-- Стиль для заголовков столбцов -->
                         <Style TargetType="DataGridColumnHeader">
@@ -117,21 +117,22 @@ BorderThickness="0" TextChanged="SearchTb_TextChanged" Margin="6,2,0,0" />
 
                 <StackPanel Orientation="Vertical"  Grid.Row="1" Margin="0 0 3 0">
                     <TextBlock Text="Название" Foreground="White" FontSize="13"/>
-                    <ComboBox x:Name="NazvanieCMB" Style="{StaticResource MaterialDesignComboBox}"
-                              BorderBrush="LightGray" Height="30" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged" />
-                    <TextBlock Text="Артикул" Foreground="White" FontSize="13"/>
-                    <ComboBox x:Name="ArticulCMB" Style="{StaticResource MaterialDesignComboBox}"
-          BorderBrush="LightGray" Height="30" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>
+                    <ComboBox x:Name="NazvanieCMB" Style="{StaticResource MaterialDesignComboBox}" Foreground="White"
+                              BorderBrush="LightGray" Height="30" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged" materialDesign:ThemeAssist.Theme="Dark"/>
+                    <TextBlock Text="Артикул" Foreground="White" FontSize="13" 
+  />
+                    <ComboBox x:Name="ArticulCMB" Style="{StaticResource MaterialDesignComboBox}" Foreground="White"
+          BorderBrush="LightGray" Height="30" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged" materialDesign:ThemeAssist.Theme="Dark"/>
                     <TextBlock Text="Цена" Foreground="White" FontSize="13"/>
                     <ComboBox x:Name="PriceCMB" Style="{StaticResource MaterialDesignComboBox}"
           BorderBrush="LightGray" Height="30"  SelectionChanged="CMB_SelectionChanged" 
-                    />
+                   materialDesign:ThemeAssist.Theme="Dark" />
                 </StackPanel>
 
 
                 <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="2,0,0,89">
                     <TextBlock Text="Поставщик" Foreground="White" FontSize="13"/>
-                    <ComboBox x:Name="CounterpartyCMB" Style="{StaticResource MaterialDesignComboBox}"
+                    <ComboBox x:Name="CounterpartyCMB" Style="{StaticResource MaterialDesignComboBox}" Foreground="White" materialDesign:ThemeAssist.Theme="Dark"
                         BorderBrush="LightGray" Height="30" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged"/>
                 </StackPanel>
                 <Button Grid.Column="1" Content="Сбросить " Click="ResetFilters_Click" HorizontalAlignment="Center" Margin="0,65,0,0" Grid.Row="1" VerticalAlignment="Top" Width="132"/>

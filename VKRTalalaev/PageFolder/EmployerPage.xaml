@@ -31,6 +31,7 @@
             <Icon:PackIconMaterial Kind="TextBoxSearch" Style="{StaticResource menuButtonIcon}" Margin="147 0 0 0" Foreground="WhiteSmoke"/>
             <Border BorderBrush="Gray" 
             BorderThickness="1" 
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
             Background="#7F484848" 
             CornerRadius="5" 
             Width="185" 

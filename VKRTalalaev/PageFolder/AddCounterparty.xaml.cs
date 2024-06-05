@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VKRTalalaev.ClassFolder;
 using VKRTalalaev.DataFolder;
 
 namespace VKRTalalaev.PageFolder
@@ -83,6 +84,7 @@ namespace VKRTalalaev.PageFolder
                     PasportPhoto= FotoImageData
             });
                 DBEntities.GetContext().SaveChanges();
+                MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
 
             }
             catch (Exception ex)

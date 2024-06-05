@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VKRTalalaev.ClassFolder;
 using VKRTalalaev.DataFolder;
 
 namespace VKRTalalaev.PageFolder
@@ -54,7 +55,7 @@ namespace VKRTalalaev.PageFolder
                     IdGoods = Int32.Parse(GoodsCb.SelectedValue.ToString())
                 });
                 DBEntities.GetContext().SaveChanges();
-
+                MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
             }
             catch (Exception ex)
             {
