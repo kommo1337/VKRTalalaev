@@ -85,7 +85,7 @@
             <TextBox Margin="15" Height="40" FontSize="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название операции" x:Name="NameOperationTb" 
                      Foreground="White" BorderBrush="LightGray" Text="{Binding NameOperation}"/>
 
-            <DatePicker  Foreground="White" Height="40" FontSize="15" Style="{StaticResource MaterialDesignDatePicker}" materialDesign:ThemeAssist.Theme="Dark" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
+            <DatePicker  Foreground="White" Height="40" FontSize="15" Language="RU-ru" Style="{StaticResource MaterialDesignDatePicker}" materialDesign:ThemeAssist.Theme="Dark" x:Name="BTHDatePick" BorderBrush="White" Width="179" materialDesign:HintAssist.Hint="Дата операции" />
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">

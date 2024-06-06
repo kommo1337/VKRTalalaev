@@ -35,6 +35,7 @@ namespace VKRTalalaev.PageFolder
             LoadCounterpartyPhoto(Emp.IdEmployer);
             LoadCounterpartyPhotoPasport(Emp.IdEmployer);
             AdresTb.Text = GetFullAddress(Emp.IdAdress);
+            LoadEmployeeGender(Emp.IdEmployer);
 
         }
 
@@ -47,8 +48,8 @@ namespace VKRTalalaev.PageFolder
 
         private void PhotoPasportBtn_Click(object sender, RoutedEventArgs e)
         {
-            //PhotoPasport.Visibility = Visibility.Visible;
-            
+            //PhotoPasport.Visibility = Visibility.Visible;напи
+
         }
 
         private void LoadCounterpartyPhoto(int counterpartyId)
@@ -75,7 +76,7 @@ namespace VKRTalalaev.PageFolder
                     }
                     else
                     {
-                        
+
                     }
                 }
                 catch (Exception ex)
@@ -110,7 +111,7 @@ namespace VKRTalalaev.PageFolder
                     }
                     else
                     {
-                        
+
                     }
                 }
                 catch (Exception ex)
@@ -122,7 +123,7 @@ namespace VKRTalalaev.PageFolder
 
         public static string GetFullAddress(int addressId)
         {
-            
+
             using (var context = DBEntities.GetContext())
             {
                 var address = context.Adress
@@ -152,6 +153,32 @@ namespace VKRTalalaev.PageFolder
                                     .FirstOrDefault();
 
                 return $"{city}, улица {street}, дом {address.House}, квартира {address.Appartment}";
+            }
+        }
+
+
+        private void LoadEmployeeGender(int idEmployer)
+        {
+            using (var context = new DBEntities())
+            {
+                var employee = context.Employer
+                                       .Where(e => e.IdEmployer == idEmployer)
+                                       .Select(e => new { e.IdGender })
+                                       .FirstOrDefault();
+
+                if (employee != null)
+                {
+                    if (employee.IdGender == 1)
+                    {
+                        Male.IsChecked = true;
+                        Female.IsChecked = false;
+                    }
+                    else if (employee.IdGender == 2)
+                    {
+                        Male.IsChecked = false;
+                        Female.IsChecked = true;
+                    }
+                }
             }
         }
     }

@@ -28,7 +28,7 @@
         <TextBlock Grid.ColumnSpan="2" Text="Информация о сотруднике" Foreground="White" FontSize="24" HorizontalAlignment="Left" Margin="293,20,0,0" Width="299"/>
 
         <!-- Left Panel -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="374" Width="200" Grid.Row="1" Panel.ZIndex="1">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Height="374" Width="200" Grid.Row="1" Panel.ZIndex="1" Margin="0,44,0,0">
             <Image    Width="148" Height="140" Margin="0,0,0,20" Name="Photo"/>
             <TextBlock Text="Фамилия" Foreground="WhiteSmoke" Margin="0 9 0 0" />
             <Border  Background ="#2C3957" Height="42" CornerRadius="6">
@@ -46,7 +46,7 @@
         </StackPanel>
 
         <!-- Right Panel -->
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="318" Width="200" Grid.Row="1" Panel.ZIndex="1">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="393" Width="200" Grid.Row="1" Panel.ZIndex="1" Margin="106,44,0,0" Grid.RowSpan="2">
             <TextBlock Text="Телефон" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
             <Border  Background ="#2C3957" Height="42" CornerRadius="6">
                 <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Phone}"/>
@@ -60,10 +60,18 @@
                 <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" x:Name="AdresTb" TextWrapping="Wrap" Height="52" Width="190"  />
 
             </Border>
-            <Button Content="Показать фото паспорта" Width="195" Height="30" Margin="0,40" Name="PhotoPasportBtn" Click="PhotoPasportBtn_Click"/>
+            <TextBlock Text="Пол" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border Background ="#2C3957"  CornerRadius="6" Margin="0 10">
+                <StackPanel Orientation="Horizontal" Margin="20" HorizontalAlignment="Stretch">
+
+                    <CheckBox Name="Male" Content="Мужской" Margin="0 0 8 0" FontSize="13" Foreground="White" BorderBrush="White" IsHitTestVisible="False"/>
+                    <CheckBox Name="Female" Content="Женский" FontSize="13" Foreground="White" BorderBrush="White" IsHitTestVisible="False"/>
+                </StackPanel>
+            </Border>
+            <Button Content="Показать фото паспорта" Width="195" Height="30" Margin="0 16" Name="PhotoPasportBtn" Click="PhotoPasportBtn_Click"/>
 
         </StackPanel>
-        <Border BorderThickness="1" Grid.Row="1" Margin="74,10,74,158" CornerRadius="28" Grid.RowSpan="2">
+        <Border BorderThickness="1" Grid.Row="1" Margin="74,5,74,141" CornerRadius="28" Grid.RowSpan="2">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#202532" Offset="0.163"/>
@@ -72,7 +80,7 @@
             </Border.Background>
         </Border>
 
-        <Border BorderThickness="1" Grid.Row="1" Margin="58,0,89,158" CornerRadius="28" Grid.RowSpan="2" Grid.Column="1">
+        <Border BorderThickness="1" Grid.Row="1" Margin="58,5,89,141" CornerRadius="28" Grid.RowSpan="2" Grid.Column="1">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#202532" Offset="0.163"/>

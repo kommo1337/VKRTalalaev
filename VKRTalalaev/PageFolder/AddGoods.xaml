@@ -69,12 +69,12 @@
 
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название" x:Name="NameTb" 
+            <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Название" x:Name="NameTb" 
          Foreground="White" BorderBrush="LightGray" Height="40" FontSize="15"/>
             <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Артикул" x:Name="ArticulTb" 
                  Foreground="White" BorderBrush="LightGray" Height="40" FontSize="15"/>
 
-            <TextBox Margin="15" Width="182" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Цена" x:Name="PriceTb" 
+            <TextBox Margin="15" Width="200" Style="{StaticResource MaterialDesignTextBox}" materialDesign:HintAssist.Hint="Цена" x:Name="PriceTb" 
          Foreground="White" BorderBrush="LightGray" Height="40" FontSize="15" />
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" materialDesign:HintAssist.Hint="Контрагент" x:Name="CounterpartyCb" 
        BorderBrush="LightGray" materialDesign:ThemeAssist.Theme="Dark" Height="40" FontSize="15"

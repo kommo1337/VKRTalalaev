@@ -88,17 +88,19 @@ namespace VKRTalalaev.PageFolder
 
             if (CounterpartyCMB.SelectedItem != null)
             {
-                string selectedCounterpartyName = (string)CounterpartyCMB.SelectedItem;
+                string selectedCounterpartyName = CounterpartyCMB.SelectedItem.ToString();
                 using (var context = DBEntities.GetContext())
                 {
-                    int selectedCounterpartyId = context.Counterparty
-                        .Where(c => c.CounterpartyName == selectedCounterpartyName)
-                        .Select(c => c.IdCounterparty)
-                        .FirstOrDefault();
-
-                    operations = operations.Where(o => o.IdCounterParty == selectedCounterpartyId);
+                    CounterpartyCMB.ItemsSource = context.Operation
+                        .Join(context.Counterparty,
+                              o => o.IdCounterParty,
+                              c => c.IdCounterparty,
+                              (o, c) => c.CounterpartyName)
+                        .Distinct()
+                        .ToList();
                 }
             }
+
 
             if (StatusCMB.SelectedItem != null)
             {

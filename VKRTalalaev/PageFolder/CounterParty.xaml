@@ -145,6 +145,7 @@ ContextMenuOpening="ListBox_Resource_ContextMenuOpening">
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                <TextBlock Text="Фильтры" Style="{StaticResource HeaderStyle}" FontFamily="Segoe UI" FontSize="15" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top"/>
 
                 <StackPanel Orientation="Vertical"  Grid.Row="1" Margin="0 0 3 0">
                     <TextBlock Text="Название" Foreground="White" FontSize="13"/>

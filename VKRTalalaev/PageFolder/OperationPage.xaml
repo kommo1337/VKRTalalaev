@@ -66,7 +66,7 @@
         </Separator>
         <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
             <Grid>
-                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  Background="{x:Null}"  Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  Background="{x:Null}" IsReadOnly="True" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <DataGrid.Resources>
                         <!-- Стиль для заголовков столбцов -->
                         <Style TargetType="DataGridColumnHeader">
@@ -114,7 +114,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
+                <TextBlock Text="Фильтры" Style="{StaticResource HeaderStyle}" FontFamily="Segoe UI" FontSize="15" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="100,0,0,0" VerticalAlignment="Top"/>
                 <StackPanel Orientation="Vertical"  Grid.Row="1" Margin="0 0 3 0">
                     <TextBlock Text="Название" Foreground="White" FontSize="13"/>
                     <ComboBox x:Name="NazvanieCMB" Style="{StaticResource MaterialDesignComboBox}" materialDesign:ThemeAssist.Theme="Dark"

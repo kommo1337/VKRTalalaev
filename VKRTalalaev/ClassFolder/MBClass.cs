@@ -47,7 +47,17 @@ namespace VKRTalalaev.ClassFolder
                 App.Current.Shutdown();
             }
         }
-
+        public static class LogoutOrCloseMessageBox
+        {
+            public static MessageBoxResult Show()
+            {
+                return MessageBox.Show(
+                    "Выберите действие:\n\nYes - Выйти из аккаунта\nNo - Закрыть приложение\nCancel - Отмена",
+                    "Выйти из аккаунта или закрыть приложение",
+                    MessageBoxButton.YesNoCancel,
+                    MessageBoxImage.Question);
+            }
+        }
         public static void ShowErrorPopup(string errorMessage, Window parentWindow)
         {
             Popup errorPopup = new Popup

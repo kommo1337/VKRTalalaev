@@ -93,7 +93,7 @@
                 x:Name="BTHDatePick" 
                 BorderBrush="White" Foreground="White" Width="179" 
                 materialDesign:HintAssist.Hint="Дата операции" Height="40" FontSize="15"
-                materialDesign:ThemeAssist.Theme="Dark"/>
+                materialDesign:ThemeAssist.Theme="Dark" Language="RU-ru"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
@@ -113,64 +113,70 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+            <StackPanel Orientation="Horizontal" Height="69" >
+            <ComboBox Margin="36 0 0 0" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
               materialDesign:HintAssist.Hint="Статус" 
               Foreground="White"
               x:Name="StatusCb" 
                       Height="40" FontSize="15"
               BorderBrush="LightGray"
-                      
+                     IsEditable="True"
               ItemsSource="{Binding Status}" 
               materialDesign:ThemeAssist.Theme="Dark"
-              SelectedValuePath="IdStatus"
-              SelectedValue="{Binding Path=IdStatus}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding StatusName}" Foreground="White"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-                <ComboBox.ItemContainerStyle>
-                    <StaticResource ResourceKey="CustomComboBoxItemStyle"/>
-                </ComboBox.ItemContainerStyle>
-            </ComboBox>
+              SelectedValuePath="IdStatus" DisplayMemberPath="StatusName"
+              >
+                    
 
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+                </ComboBox>
+
+                <Button Content="+" FontSize="30" 
+            Width="50" Height="50" Tag ="Status" Click="AddButton_Click"
+            Style="{StaticResource MaterialDesignToolButton}" 
+            />
+            </StackPanel>
+
+            <StackPanel Orientation ="Horizontal">
+            <ComboBox Margin="36 0 0 0" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
               materialDesign:HintAssist.Hint="Проект" 
               Foreground="White"
               x:Name="ProjectCb" 
               BorderBrush="LightGray"
+                      IsEditable="True"
                       Height="40" FontSize="15"
               ItemsSource="{Binding Project}" 
               materialDesign:ThemeAssist.Theme="Dark"
               SelectedValuePath="IdProject"
-              SelectedValue="{Binding Path=IdProject}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding ProjectName}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
+              DisplayMemberPath="ProjectName">
+                
             </ComboBox>
+                <Button Content="+" FontSize="30" 
+Width="50" Height="50" Tag ="Project" Click="AddButton_Click"
+Style="{StaticResource MaterialDesignToolButton}" 
+/>
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" Margin="10" VerticalAlignment="Center">
-            <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
+
+            <StackPanel Orientation="Horizontal">
+            <ComboBox Margin="36 0 0 0 " Width="200" Style="{StaticResource MaterialDesignComboBox}" 
               materialDesign:HintAssist.Hint="Тип" 
             Foreground="White"
               x:Name="TypeCb"
+                      IsEditable="True"
                       Height="40" FontSize="15"
               BorderBrush="LightGray"
               ItemsSource="{Binding Type}" 
               materialDesign:ThemeAssist.Theme="Dark"
               SelectedValuePath="IdType"
-              SelectedValue="{Binding Path=IdType}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
+              DisplayMemberPath="Name">
+                
             </ComboBox>
-
+                <Button Content="+" FontSize="30"  
+Width="50" Height="50" Tag="Type" Click="AddButton_Click"
+Style="{StaticResource MaterialDesignToolButton}" 
+/>
+            </StackPanel>
             <ComboBox Margin="15" Width="200" Style="{StaticResource MaterialDesignComboBox}" 
               materialDesign:HintAssist.Hint="Материалы" 
              Foreground="White"
@@ -192,5 +198,6 @@
 
         <!-- Button -->
         <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Добавить" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" Click="Button_Click" />
+        
     </Grid>
 </Page>

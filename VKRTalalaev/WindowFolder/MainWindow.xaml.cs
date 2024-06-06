@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VKRTalalaev.PageFolder;
+using static VKRTalalaev.ClassFolder.MBClass;
 
 namespace VKRTalalaev.WindowFolder
 {
@@ -24,6 +25,7 @@ namespace VKRTalalaev.WindowFolder
         {
             InitializeComponent();
             MainFrame.Navigate(new OperationPage());
+            this.Closing += MainWindow_Closing;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -46,9 +48,63 @@ namespace VKRTalalaev.WindowFolder
             MainFrame.Navigate(new Goodspage());
         }
 
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Используем общий метод для обработки закрытия
+            HandleClosing(e);
+        }
+
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
+            // Создаем фиктивное событие CancelEventArgs для передачи в HandleClosing
+            var cancelEventArgs = new System.ComponentModel.CancelEventArgs();
+            HandleClosing(cancelEventArgs);
+        }
+
+        private void HandleClosing(System.ComponentModel.CancelEventArgs e) //TODO
+        {
+            
+            var result = LogoutOrCloseMessageBox.Show();
+
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    
+                    Logout();
+                    e.Cancel = true;
+                    break;
+                case MessageBoxResult.No:
+                    
+                    Application.Current.Shutdown();
+                    break;
+                case MessageBoxResult.Cancel:
+                    
+                    e.Cancel = true;
+                    break;
+            }
+        }
+
+        private void Logout()
+        {
+        
+            this.Hide();
+           
+            var authWindow = new AutorisationWindow();
+            authWindow.Show();
+            
+            this.Close();
+        }
+    }
+
+    public static class LogoutOrCloseMessageBox
+    {
+        public static MessageBoxResult Show()
+        {
+            return MessageBox.Show(
+                "Выберите действие:\n\nYes - Выйти из аккаунта\nNo - Закрыть приложение\nCancel - Отмена",
+                "Выйти из аккаунта или закрыть приложение",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question);
         }
     }
 }
