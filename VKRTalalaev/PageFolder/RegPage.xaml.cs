@@ -81,5 +81,22 @@ namespace VKRTalalaev.PageFolder
                 return builder.ToString();
             }
         }
+
+        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var textBlock = sender as TextBlock;
+            textBlock.Foreground = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void TextBlock_MouseLeave(object sender, MouseEventArgs e)
+        {
+            var textBlock = sender as TextBlock;
+            textBlock.Foreground = new SolidColorBrush(Colors.White);
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new LoginPage());
+        }
     }
 }

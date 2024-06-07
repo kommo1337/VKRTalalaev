@@ -6,13 +6,20 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:VKRTalalaev.WindowFolder"
         mc:Ignorable="d"
-        Title="Autorisation" Height="450" Width="800">
+        Title="Autorisation" Height="450" Width="800" Background="#FF514890"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="17*"/>
             <ColumnDefinition Width="23*"/>
         </Grid.ColumnDefinitions>
-        <Image HorizontalAlignment="Left" Height="429" Margin="5,0,0,0" VerticalAlignment="Center" Width="335" Source="/ResourceFolder/ImageFolder/Designer.png" Stretch="UniformToFill"  />
+        <StackPanel >
+           <Image HorizontalAlignment="Center" Height="291" VerticalAlignment="Center" Width="340" Source="/Mhonolitlogo.ico" Stretch="Fill"  />
+            <TextBlock Text="Информационная система Монолит" FontSize ="35" TextWrapping="Wrap" Padding="10" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold">
+                
+            </TextBlock>
+        </StackPanel>
         <Frame Grid.Column="2" Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

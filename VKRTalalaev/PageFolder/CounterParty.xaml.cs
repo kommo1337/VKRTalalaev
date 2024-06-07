@@ -1,4 +1,6 @@
-﻿using Microsoft.Win32;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,6 +36,7 @@ namespace VKRTalalaev.PageFolder
             InitializeComponent();
             DBEntities.ResetContext();
             LoadDataGridData();
+            LoadPieChartData();
             DBEntities.ResetContext();
             LoadComboBoxData();
             LoadEllipseImage();
@@ -210,6 +213,30 @@ namespace VKRTalalaev.PageFolder
                 ListBox_Resource_ContextMenu.Visibility = Visibility.Hidden;
             else
                 ListBox_Resource_ContextMenu.Visibility = Visibility.Visible;
+        }
+
+        private void LoadPieChartData()
+        {
+            using (var context = DBEntities.GetContext())
+            {
+
+                var totalCounterparties = context.Counterparty.Count();
+                var totalEmployers = context.Employer.Count();
+                var totalGoods = context.Goods.Count();
+                var totalOperations = context.Operation.Count();
+                var totalUsers = context.User.Count();
+
+                SeriesCollection seriesCollection = new SeriesCollection
+        {
+                    new PieSeries { Title = "Контрагенты", Values = new ChartValues<int> { totalCounterparties } },
+                    new PieSeries { Title = "Сотрудники", Values = new ChartValues<int> { totalEmployers } },
+                    new PieSeries { Title = "Товары", Values = new ChartValues<int> { totalGoods } },
+                    new PieSeries { Title = "Операции", Values = new ChartValues<int> { totalOperations } },
+                    new PieSeries { Title = "Пользователи", Values = new ChartValues<int> { totalUsers } },
+        };
+
+                pieChart.Series = seriesCollection;
+            }
         }
     }
 

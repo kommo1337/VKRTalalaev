@@ -109,12 +109,12 @@ SelectedValuePath="IdAdress" materialDesign:ThemeAssist.Theme="Dark">
    Width="190"
    Height="170" 
                Margin="10"/>
-            <Button Content="Добавить фото" Click="Button_Click"/>
+            <Button Content="Добавить фото" Click="Button_Click_2"/>
 
         </StackPanel>
 
         <!-- Button -->
-        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Редактировать" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" Click="Button_Click_2" />
+        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Редактировать" HorizontalAlignment="Center" Margin="0,10,0,10" Width="185" Click="Button_Click" />
 
     </Grid>
 </Page>

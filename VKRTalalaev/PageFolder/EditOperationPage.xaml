@@ -74,11 +74,12 @@
   BorderBrush="LightGray"
   ItemsSource="{Binding Counterparty}" 
   
-  SelectedValuePath="IdCounterparty"
-  SelectedValue="{Binding Path=IdCounterparty}">
+ SelectedValuePath="IdTypeOfOperation"
+        
+SelectedValue="{Binding Path=IdTypeOfOperation}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding CounterpartyName}" />
+                        <TextBlock Text="{Binding TypeName}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

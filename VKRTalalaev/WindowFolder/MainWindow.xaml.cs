@@ -91,7 +91,6 @@ namespace VKRTalalaev.WindowFolder
            
             var authWindow = new AutorisationWindow();
             authWindow.Show();
-            
             this.Close();
         }
     }

@@ -106,7 +106,7 @@ namespace VKRTalalaev.PageFolder
                     {
                         MBClass.ShowMesagePopup("Пользователь не найден", Application.Current.MainWindow);
                     }
-                }
+            }
             //}
             //catch (Exception ex)
             //{
@@ -143,6 +143,8 @@ namespace VKRTalalaev.PageFolder
             {
                 ClassFolder.MBClass.ErrorMB("Ошибка при загрузке изображения: " + ex.Message);
             }
+
+            
         }
     }
 

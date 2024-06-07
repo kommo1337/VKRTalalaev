@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,6 +29,7 @@ namespace VKRTalalaev.PageFolder
         public OperationPage()
         {
             InitializeComponent();
+            LoadPieChartData();
             DBEntities.ResetContext();
             OperationsDataGrid.ItemsSource = DBEntities.GetContext().Operation.
         ToList().OrderBy(u => u.IdOperation);
@@ -202,6 +205,30 @@ namespace VKRTalalaev.PageFolder
             }
             image.Freeze();
             return image;
+        }
+
+        private void LoadPieChartData()
+        {
+            using (var context = DBEntities.GetContext())
+            {
+
+                var totalCounterparties = context.Counterparty.Count();
+                var totalEmployers = context.Employer.Count();
+                var totalGoods = context.Goods.Count();
+                var totalOperations = context.Operation.Count();
+                var totalUsers = context.User.Count();
+
+                SeriesCollection seriesCollection = new SeriesCollection
+                {
+                    new PieSeries { Title = "Контрагенты", Values = new ChartValues<int> { totalCounterparties } },
+                    new PieSeries { Title = "Сотрудники", Values = new ChartValues<int> { totalEmployers } },
+                    new PieSeries { Title = "Товары", Values = new ChartValues<int> { totalGoods } },
+                    new PieSeries { Title = "Операции", Values = new ChartValues<int> { totalOperations } },
+                    new PieSeries { Title = "Пользователи", Values = new ChartValues<int> { totalUsers } },
+                };
+
+                pieChart.Series = seriesCollection;
+            }
         }
     }
 }

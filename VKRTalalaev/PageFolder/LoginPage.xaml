@@ -11,11 +11,14 @@
 
     <Grid>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-            <Label Content="Вход" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"/>
-            <TextBox Name="LoginTB" Width="200" Height="34" Margin="10"  materialDesign:HintAssist.Hint="Login"/>
-            <PasswordBox Name="PasswordTb" Width="200" Height="34" Margin="10" materialDesign:HintAssist.Hint="Password"/>
-            <Button Content="Войти" Width="100" Height="30" Background="Blue" Foreground="White" HorizontalAlignment="Center" Margin=" 0 20" Click="Button_Click"/>
-            <TextBlock  Text="Нету аккаунта? Зарегестироваться" HorizontalAlignment="Center" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"/>
+            <Label Content="Вход" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" Foreground="#E5FFFFFF" />
+            <TextBox Name="LoginTB" Width="200" Height="34" Margin="10"  materialDesign:HintAssist.Hint="Login" Foreground="White"/>
+            <PasswordBox Name="PasswordTb" Width="200" Height="34" Margin="10" Foreground="White" materialDesign:HintAssist.Hint="Password"/>
+            <Button Content="Войти" Width="100" Height="30" Background="#FF4522C7" Foreground="White" HorizontalAlignment="Center" Margin=" 0 20" Click="Button_Click"/>
+            <TextBlock  Text="Нету аккаунта? Зарегистрироваться" Foreground="White" HorizontalAlignment="Center" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" 
+                   MouseEnter="TextBlock_MouseEnter"
+                   MouseLeave="TextBlock_MouseLeave"
+                   Cursor="Hand"/>
         </StackPanel>
     </Grid>
 </Page>
