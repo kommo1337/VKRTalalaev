@@ -28,39 +28,68 @@ namespace VKRTalalaev.PageFolder
         public LoginPage()
         {
             InitializeComponent();
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            
                 string hashedPassword = ComputeSha256Hash(PasswordTb.Password);
-                DBEntities.ResetContext();
-                var user = DBEntities.GetContext().User
-                    .FirstOrDefault(u => u.Login == LoginTB.Text && u.PasswordHash == hashedPassword && !u.IsBanned);
+                
+                    var user = DBEntities.GetContext().User
+                        .FirstOrDefault(u => u.Login == LoginTB.Text && u.PasswordHash == hashedPassword && !u.IsBanned);
 
-                if (user != null)
-                {
-                    MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
-                    new MainWindow().Show();
-                    VariableClass.CurentUser = user.IdUser;
-                    foreach (Window window in Application.Current.Windows)
-                    {
-                        if (window is Window && window.Title == "Autorisation")
-                        {
-                            window.Close();
-                        }
-                    }
-                }
-                else
-                {
-                    MBClass.ShowErrorPopup("Неверный логин или пароль", Application.Current.MainWindow);
-                }
-            }
-            catch (Exception ex)
+
+            if (user != null)
             {
-                MBClass.ShowErrorPopup(ex.Message, Application.Current.MainWindow);
+                //MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
+                //new MainWindow().Show();
+                //VariableClass.CurentUser = user.IdUser;
+                //foreach (Window window in Application.Current.Windows)
+                //{
+                //    if (window is Window && window.Title == "Autorisation")
+                //    {
+                //        window.Close();
+                //    }
+                //}
+
+
+                switch (user.IdRole)
+                {
+                    case 1:
+                        new AdminWindow().Show();
+
+                        VariableClass.CurentUser = user.IdUser;
+                        foreach (Window window in Application.Current.Windows)
+                        {
+                            if (window is Window && window.Title == "Autorisation")
+                            {
+                                window.Close();
+                            }
+                        }
+                        break;
+                    case 2:
+                        new MainWindow().Show();
+
+                        VariableClass.CurentUser = user.IdUser;
+                        foreach (Window window in Application.Current.Windows)
+                        {
+                            if (window is Window && window.Title == "Autorisation")
+                            {
+                                window.Close();
+                            }
+                        }
+                        break;
+
+                }
             }
+            else
+            {
+                        MBClass.ShowErrorPopup("Неверный логин или пароль", Application.Current.MainWindow);
+            }
+                
+            
+            
         }
 
         private static string ComputeSha256Hash(string rawData)

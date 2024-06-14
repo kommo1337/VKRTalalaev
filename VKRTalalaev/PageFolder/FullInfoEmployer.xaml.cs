@@ -48,7 +48,7 @@ namespace VKRTalalaev.PageFolder
 
         private void PhotoPasportBtn_Click(object sender, RoutedEventArgs e)
         {
-            //PhotoPasport.Visibility = Visibility.Visible;напи
+            NavigationService.Navigate(new PasportPhotoEmployer(Emp));
 
         }
 
@@ -124,9 +124,8 @@ namespace VKRTalalaev.PageFolder
         public static string GetFullAddress(int addressId)
         {
 
-            using (var context = DBEntities.GetContext())
-            {
-                var address = context.Adress
+            DBEntities.ResetContext();
+                var address = DBEntities.GetContext().Adress
                                      .Where(a => a.IdAdress == addressId)
                                      .Select(a => new
                                      {
@@ -142,26 +141,25 @@ namespace VKRTalalaev.PageFolder
                     return "Address not found";
                 }
 
-                var city = context.City
+                var city = DBEntities.GetContext().City
                                   .Where(c => c.IdCity == address.IdCity)
                                   .Select(c => c.CityName)
                                   .FirstOrDefault();
 
-                var street = context.Street
+                var street = DBEntities.GetContext().Street
                                     .Where(s => s.IdStreet == address.IdStreet)
                                     .Select(s => s.StreetName)
                                     .FirstOrDefault();
 
                 return $"{city}, улица {street}, дом {address.House}, квартира {address.Appartment}";
-            }
+            
         }
 
 
         private void LoadEmployeeGender(int idEmployer)
         {
-            using (var context = new DBEntities())
-            {
-                var employee = context.Employer
+            
+                var employee = DBEntities.GetContext().Employer
                                        .Where(e => e.IdEmployer == idEmployer)
                                        .Select(e => new { e.IdGender })
                                        .FirstOrDefault();
@@ -179,7 +177,7 @@ namespace VKRTalalaev.PageFolder
                         Female.IsChecked = true;
                     }
                 }
-            }
+            
         }
     }
 }

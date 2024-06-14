@@ -21,13 +21,21 @@ using VKRTalalaev.WindowFolder;
 namespace VKRTalalaev.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для RegPage.xaml
+    /// Логика взаимодействия для AddUserWindow.xaml
     /// </summary>
-    public partial class RegPage : Page
+    public partial class AddUserWindow : Page
     {
-        public RegPage()
+        public AddUserWindow()
         {
             InitializeComponent();
+            LoadComboBoxData();
+        }
+
+        private void LoadComboBoxData()
+        {
+            DBEntities.ResetContext();
+
+            GenderCb.ItemsSource = DBEntities.GetContext().Role.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,12 +43,12 @@ namespace VKRTalalaev.PageFolder
             try
             {
 
-                string hashedPassword = ComputeSha256Hash(PasswordTb.Password);
+                string hashedPassword = ComputeSha256Hash(ArticulTb.Text);
                 DBEntities.ResetContext();
                 DBEntities.
                 GetContext().User.Add(new User()
                 {
-                    Login = LoginTB.Text,
+                    Login = NameTb.Text,
                     PasswordHash = hashedPassword,
                     IdRole = 1,
                     IsBanned = false
@@ -48,15 +56,7 @@ namespace VKRTalalaev.PageFolder
                 DBEntities.GetContext().SaveChanges();
                 DBEntities.ResetContext();
                 MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
-                new MainWindow().Show();
-
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window is Window && window.Title == "Autorisation")
-                    {
-                        window.Close();
-                    }
-                }
+                
             }
 
             catch (Exception ex)
@@ -67,13 +67,12 @@ namespace VKRTalalaev.PageFolder
 
         private static string ComputeSha256Hash(string rawData)
         {
-            
+
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // Вычисляем хэш - возвращаем массив байтов
+                
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
 
-                
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -81,23 +80,6 @@ namespace VKRTalalaev.PageFolder
                 }
                 return builder.ToString();
             }
-        }
-
-        private void TextBlock_MouseEnter(object sender, MouseEventArgs e)
-        {
-            var textBlock = sender as TextBlock;
-            textBlock.Foreground = new SolidColorBrush(Colors.LightGray);
-        }
-
-        private void TextBlock_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var textBlock = sender as TextBlock;
-            textBlock.Foreground = new SolidColorBrush(Colors.White);
-        }
-
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            NavigationService.Navigate(new LoginPage());
         }
     }
 }

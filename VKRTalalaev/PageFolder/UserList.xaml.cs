@@ -18,27 +18,26 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using VKRTalalaev.ClassFolder;
 using VKRTalalaev.DataFolder;
-using System.Runtime.Remoting.Contexts;
+using System.Globalization;
+using Type = System.Type;
 
 namespace VKRTalalaev.PageFolder
 {
     /// <summary>
-    /// Логика взаимодействия для OperationPage.xaml
+    /// Логика взаимодействия для UserList.xaml
     /// </summary>
-    public partial class OperationPage : Page
+    public partial class UserList : Page
     {
-        public OperationPage()
+        public UserList()
         {
-
-
             InitializeComponent();
+            LoadDataGridData();
             LoadPieChartData();
-            DBEntities.ResetContext();
-            OperationsDataGrid.ItemsSource = DBEntities.GetContext().Operation.
-        ToList().OrderBy(u => u.IdOperation);
-            DBEntities.ResetContext();
             LoadComboBoxData();
             LoadEllipseImage();
+            DBEntities.ResetContext();
+            OperationsDataGrid.ItemsSource = DBEntities.GetContext().User.
+        ToList().OrderBy(u => u.IdUser);
             DBEntities.ResetContext();
             using (var context = DBEntities.GetContext())
             {
@@ -57,80 +56,49 @@ namespace VKRTalalaev.PageFolder
                 }
             }
         }
+
         private void LoadComboBoxData()
         {
-            NazvanieCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.NameOperation).Distinct().ToList();
-            DataCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.DateOperation).Distinct().ToList();
-
-            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Counterparty.Select(o => o.CounterpartyName).ToList();
-            using (var context = DBEntities.GetContext())
-            {
-                StatusCMB.ItemsSource = context.Status
-                    .Join(context.Status,
-                          o => o.IdStatus,
-                          c => c.IdStatus,
-                          (o, c) => c.StatusName)
-                    .Distinct()
-                    .ToList();
-            }
-            //StatusCMB.ItemsSource = DBEntities.GetContext().Operation.Select(o => o.IdStatus).Distinct().ToList();
+            DBEntities.ResetContext();
+            NazvanieCMB.ItemsSource = DBEntities.GetContext().User.Select(o => o.Login).Distinct().ToList();
+            ArticulCMB.ItemsSource = DBEntities.GetContext().Role.Select(o => o.RoleName).Distinct().ToList();
+            PriceCMB.ItemsSource = DBEntities.GetContext().User.Select(o => o.IsBanned).Distinct().ToList();
         }
 
         private void LoadDataGridData()
         {
             DBEntities.ResetContext();
-            var operations = DBEntities.GetContext().Operation.AsQueryable();
+            var operations = DBEntities.GetContext().User.AsQueryable();
 
             if (NazvanieCMB.SelectedItem != null)
             {
-
                 string selectedName = NazvanieCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.NameOperation == selectedName);
+                operations = operations.Where(o => o.Login == selectedName);
             }
 
-            if (DataCMB.SelectedItem != null)
+            if (ArticulCMB.SelectedItem != null)
             {
-                DateTime selectedData = Convert.ToDateTime(DataCMB.SelectedItem);
-                operations = operations.Where(o => o.DateOperation == selectedData);
-            }
-
-            if (CounterpartyCMB.SelectedItem != null)
-            {
-                //int selectedCounterpartyName = Convert.ToInt32(CounterpartyCMB.SelectedValue);
-                //operations = operations.Where(o => o.IdCounterParty == selectedCounterpartyName);
-
-
-                string selectedCounterpartyName = (string)CounterpartyCMB.SelectedItem;
+                string selectedCounterpartyName = (string)ArticulCMB.SelectedItem;
                 int selectedCounterpartyId = 0;
-                var status = (from c in DBEntities.GetContext().Counterparty
-                              where c.CounterpartyName == selectedCounterpartyName
-                              select c.IdCounterparty).FirstOrDefault();
+                var status = (from c in DBEntities.GetContext().Role
+                              where c.RoleName == selectedCounterpartyName
+                              select c.IdRole).FirstOrDefault();
 
                 if (status != 0)
                 {
                     selectedCounterpartyId = status;
                 }
 
-                operations = operations.Where(o => o.IdCounterParty == selectedCounterpartyId);
+                operations = operations.Where(o => o.IdRole == selectedCounterpartyId);
             }
 
-            if (StatusCMB.SelectedItem != null)
-            {
-                string selectedCounterpartyName = (string)StatusCMB.SelectedItem;
-                int selectedCounterpartyId = 0;
-                var status = (from c in DBEntities.GetContext().Status
-                              where c.StatusName == selectedCounterpartyName
-                              select c.IdStatus).FirstOrDefault();
-
-                if (status != 0)
-                {
-                    selectedCounterpartyId = status;
-                }
-
-                operations = operations.Where(o => o.IdStatus == selectedCounterpartyId);
-                
-            }
             
+            if (PriceCMB.SelectedItem != null)
+            {
+                bool selectedStatus = (bool)PriceCMB.SelectedItem;
+                operations = operations.Where(o => o.IsBanned == selectedStatus);
+            }
+
             OperationsDataGrid.ItemsSource = operations.ToList();
         }
 
@@ -141,9 +109,9 @@ namespace VKRTalalaev.PageFolder
         private void ResetFilters_Click(object sender, RoutedEventArgs e)
         {
             NazvanieCMB.SelectedItem = null;
-            DataCMB.SelectedItem = null;
-            CounterpartyCMB.SelectedItem = null;
-            StatusCMB.SelectedItem = null;
+            PriceCMB.SelectedItem = null;
+            
+            ArticulCMB.SelectedItem = null;
 
             LoadDataGridData();
         }
@@ -151,7 +119,7 @@ namespace VKRTalalaev.PageFolder
         private void SearchTb_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTb.Text.ToLower();
-            var customers = DBEntities.GetContext().Operation.ToList();
+            var customers = DBEntities.GetContext().User.ToList();
             var filteredCustomers = customers.Where(customer =>
             {
                 foreach (PropertyInfo property in customer.GetType().GetProperties())
@@ -163,7 +131,7 @@ namespace VKRTalalaev.PageFolder
                     }
                 }
                 return false;
-            }).OrderBy(u => u.NameOperation).ToList();
+            }).OrderBy(u => u.Login).ToList();
 
             OperationsDataGrid.ItemsSource = filteredCustomers;
 
@@ -173,6 +141,20 @@ namespace VKRTalalaev.PageFolder
             }
         }
 
+        public object Convert(object value, System.Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is bool isBanned)
+            {
+                return isBanned ? "Заблокирован" : "активен";
+            }
+            return "Неизвестно";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
         private void CMB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LoadDataGridData();
@@ -180,20 +162,24 @@ namespace VKRTalalaev.PageFolder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddOperationPage());
+            NavigationService.Navigate(new AddUserWindow());
         }
 
         private void modifyIt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditOperationPage(OperationsDataGrid.SelectedItem as Operation));
+            NavigationService.Navigate(new EditUser(OperationsDataGrid.SelectedItem as User));
         }
 
+        private void FullInfo_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         private void LoadEllipseImage()
         {
-            
-                DBEntities.ResetContext();
-                var employer = DBEntities.GetContext().Employer
+            using (var context = DBEntities.GetContext())
+            {
+                var employer = context.Employer
                                       .Where(e => e.IdUser == VariableClass.CurentUser)
                                       .Select(e => e.Photo)
                                       .FirstOrDefault();
@@ -208,7 +194,7 @@ namespace VKRTalalaev.PageFolder
                 {
                     MyElipse.Fill = new SolidColorBrush(Colors.Gray);
                 }
-            
+            }
         }
 
         private BitmapImage LoadImage(byte[] imageData)
@@ -227,9 +213,9 @@ namespace VKRTalalaev.PageFolder
             return image;
         }
 
+
         private void LoadPieChartData()
         {
-            DBEntities.ResetContext();
             using (var context = DBEntities.GetContext())
             {
 
@@ -252,42 +238,40 @@ namespace VKRTalalaev.PageFolder
             }
         }
 
-        private void FullInfo_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new FullInfoOperationPage(OperationsDataGrid.SelectedItem as Operation));
-        }
-
         private void DeleteIt_Click(object sender, RoutedEventArgs e)
         {
             if (OperationsDataGrid.SelectedItem == null)
                 return;
-            
-            Operation selectedResource = OperationsDataGrid.SelectedItem as Operation;
+
+            Goods selectedResource = OperationsDataGrid.SelectedItem as Goods;
             if (selectedResource == null)
                 return;
 
-            if (MBClass.QuestionMB("Удалить операцию " + $"{selectedResource.NameOperation}?"))
+            if (MBClass.QuestionMB("Удалить товар " + $"{selectedResource.Name}?"))
             {
                 DBEntities.ResetContext();
                 var context = DBEntities.GetContext();
 
-                var resource = context.Operation.Find(selectedResource.IdOperation); 
+
+                var resource = DBEntities.GetContext().Employer.Find(selectedResource.IdGoods);
 
                 if (resource != null)
                 {
-                    context.Operation.Remove(resource);
 
-                    context.SaveChanges();
+                    DBEntities.GetContext().Employer.Remove(resource);
 
-                    MBClass.InfoMB("Операция удалена");
-                    OperationsDataGrid.ItemsSource = context.Operation.ToList().OrderBy(u => u.NameOperation);
+
+                    DBEntities.GetContext().SaveChanges();
+
+
+                    MBClass.InfoMB("Товар удалён");
+                    OperationsDataGrid.ItemsSource = DBEntities.GetContext().Goods.ToList().OrderBy(u => u.IdGoods);
                 }
                 else
                 {
-                    MBClass.ErrorMB("Операция не найдена в базе данных.");
+                    MBClass.ErrorMB("Товар не найден в базе данных.");
                 }
             }
-
         }
     }
 }

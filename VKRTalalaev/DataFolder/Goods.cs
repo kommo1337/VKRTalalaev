@@ -24,8 +24,9 @@ namespace VKRTalalaev.DataFolder
         public string Name { get; set; }
         public string Articul { get; set; }
         public int Price { get; set; }
-        public int IdCounterparty { get; set; }
+        public Nullable<int> IdCounterparty { get; set; }
     
+        public virtual Counterparty Counterparty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Operation> Operation { get; set; }
     }

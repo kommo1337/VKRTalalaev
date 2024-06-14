@@ -46,7 +46,7 @@
              BorderThickness="0" TextChanged="SearchTb_TextChanged" Margin="6,2,0,0" />
             </Border>
 
-            <TextBlock Text="" x:Name="NameUserTb" Margin="190 0 0 0" Width="60" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="" x:Name="NameUserTb" Margin="160 0 0 0" Width="88" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
 
             <StackPanel Margin="19 0 0 0"  Height="39">
                 <Ellipse Width="40" Height="40" Name="MyElipse" VerticalAlignment="Top">
@@ -155,7 +155,7 @@
                               BorderBrush="LightGray" Height="30" Margin="0 0 0 30" SelectionChanged="CMB_SelectionChanged"
                               materialDesign:ThemeAssist.Theme="Dark"
                               Foreground="White"/>
-                    <TextBlock Text="Телефон" Foreground="White" FontSize="13"/>
+                    <TextBlock Text="Телефон" Foreground="White" FontSize="13" />
                     <ComboBox x:Name="DataCMB" Style="{StaticResource MaterialDesignComboBox}"
           BorderBrush="LightGray" Height="30" materialDesign:ThemeAssist.Theme="Dark"
 Foreground="White" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>

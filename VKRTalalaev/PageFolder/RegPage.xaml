@@ -13,9 +13,9 @@
     <Grid>
         <StackPanel Grid.Column="1" VerticalAlignment="Center">
             <Label Content="Регистрация" FontWeight="Bold" FontSize="20" Foreground="White" HorizontalAlignment="Center"/>
-            <TextBox Name="LoginTB" Width="200" Height="34" Margin="10" Foreground="White" materialDesign:HintAssist.Hint="Login"/>
-            <PasswordBox Name="PasswordTb" Width="200" Height="34" Margin="10" Foreground="White" materialDesign:HintAssist.Hint="Password"/>
-            <PasswordBox Name="PasswordRepeat" Width="200" Height="34" Margin="10" Foreground="White" materialDesign:HintAssist.Hint="Repeat password"/>
+            <TextBox Name="LoginTB" Width="200" Height="34" Margin="5" Padding="10" Foreground="White" materialDesign:HintAssist.Hint="Логин"/>
+            <PasswordBox Name="PasswordTb" Width="200" Padding="5" Height="34" Margin="10" Foreground="White" materialDesign:HintAssist.Hint="Пароль"/>
+            <PasswordBox Name="PasswordRepeat" Width="200" Padding="5" Height="34" Margin="10" Foreground="White" materialDesign:HintAssist.Hint="Повторите пароль"/>
             <Button Content="Регистрация" Width="179" Height="30" Background="#FF4522C7" Foreground="White" HorizontalAlignment="Center" Margin=" 0 20" Click="Button_Click"/>
             <TextBlock  Text="Есть аккаунт? Войти" Foreground="White" HorizontalAlignment="Center" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
                         MouseEnter="TextBlock_MouseEnter"

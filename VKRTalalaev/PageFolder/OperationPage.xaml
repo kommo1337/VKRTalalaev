@@ -45,7 +45,7 @@
         BorderThickness="0" TextChanged="SearchTb_TextChanged" Margin="6,2,0,0" />
             </Border>
 
-            <TextBlock Text="" x:Name="NameUserTb" Margin="190 0 0 0" Width="60" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="" x:Name="NameUserTb" Margin="160 0 0 0" Width="88" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
 
             <StackPanel Margin="19 0 0 0"  Height="39">
                 <Ellipse Width="40" Height="40" Name="MyElipse" VerticalAlignment="Top">
@@ -67,7 +67,8 @@
         </Separator>
         <Border Background="#202532" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.RowSpan="3">
             <Grid>
-                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  Background="{x:Null}" IsReadOnly="True" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <DataGrid x:Name="OperationsDataGrid" AutoGenerateColumns="False"  Background="{x:Null}" IsReadOnly="True" 
+                          Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemsSource="{Binding Operation}">
                     <DataGrid.Resources>
                         <!-- Стиль для заголовков столбцов -->
                         <Style TargetType="DataGridColumnHeader">
@@ -78,8 +79,10 @@
                     </DataGrid.Resources>
 
                     <DataGrid.ContextMenu>
-                        <ContextMenu>
+                        <ContextMenu BorderBrush="#FF3F507D">
                             <MenuItem Header="Редактирование" x:Name="modifyIt" Click="modifyIt_Click"/>
+                            <MenuItem Header="Полная информация" x:Name="FullInfo" Click="FullInfo_Click"/>
+                            <MenuItem Header="Удалить" x:Name="DeleteIt" Click="DeleteIt_Click"/>
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <DataGrid.Columns >
@@ -127,7 +130,7 @@ Foreground="White"
           BorderBrush="LightGray" Height="30" Margin="0 00 0 30" SelectionChanged="CMB_SelectionChanged"/>
                     <TextBlock Text="Контрагент" Foreground="White" FontSize="13"/>
                     <ComboBox x:Name="CounterpartyCMB" Style="{StaticResource MaterialDesignComboBox}" materialDesign:ThemeAssist.Theme="Dark"
-Foreground="White"
+Foreground="White" SelectedValuePath="IdCounterparty" 
           BorderBrush="LightGray" Height="30"  SelectionChanged="CMB_SelectionChanged" 
                     />
                 </StackPanel>

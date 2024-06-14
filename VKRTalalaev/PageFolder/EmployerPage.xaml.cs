@@ -19,6 +19,9 @@ using System.Windows.Shapes;
 using VKRTalalaev.ClassFolder;
 using VKRTalalaev.DataFolder;
 using static MaterialDesignThemes.Wpf.Theme;
+using VKRTalalaev.Properties;
+using System.Data.Entity;
+using System.Runtime.Remoting.Contexts;
 
 namespace VKRTalalaev.PageFolder
 {
@@ -59,14 +62,13 @@ namespace VKRTalalaev.PageFolder
             try
             {
                 DBEntities.ResetContext();
-                using (var context = DBEntities.GetContext())
-                {
-                    var fullNames = context.Employer
+                
+                    var fullNames = DBEntities.GetContext().Employer
                                           .Select(e => e.Surname + " " + e.Name + " " + e.Therdname)
                    .ToList();
 
                     NazvanieCMB.ItemsSource = fullNames;
-                }
+                
             }
             catch (Exception ex)
             {
@@ -74,7 +76,15 @@ namespace VKRTalalaev.PageFolder
             }
             DBEntities.ResetContext();
             DataCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Phone).Distinct().ToList();
-            CounterpartyCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.IdGender).Distinct().ToList();
+            
+                CounterpartyCMB.ItemsSource = DBEntities.GetContext().Gender
+                    .Join(DBEntities.GetContext().Gender,
+                          o => o.IdGender,
+                          c => c.IdGender,
+                          (o, c) => c.GenderName)
+                    .Distinct()
+                    .ToList();
+            
             StatusCMB.ItemsSource = DBEntities.GetContext().Employer.Select(o => o.Email).Distinct().ToList();
         }
 
@@ -86,7 +96,7 @@ namespace VKRTalalaev.PageFolder
             if (NazvanieCMB.SelectedItem != null)
             {
                 string selectedName = NazvanieCMB.SelectedItem.ToString();
-                operations = operations.Where(o => o.Name == selectedName); //TODO посик по ФИО
+                operations = operations.Where(emp => emp.Surname + " " + emp.Name + " " + emp.Therdname == selectedName);
             }
 
             if (DataCMB.SelectedItem != null)
@@ -95,10 +105,17 @@ namespace VKRTalalaev.PageFolder
                 operations = operations.Where(o => o.Phone == selectedData);
             }
 
-            if (CounterpartyCMB.SelectedItem != null)
+            if (CounterpartyCMB.SelectedItem != null) //TODO
             {
-                int selectedCounterparty = (int)CounterpartyCMB.SelectedItem;
-                operations = operations.Where(o => o.IdGender == selectedCounterparty);
+                string selectedCounterpartyName = (string)CounterpartyCMB.SelectedItem;
+                
+                    int selectedCounterpartyId = DBEntities.GetContext().Gender
+                        .Where(c => c.GenderName == selectedCounterpartyName)
+                        .Select(c => c.IdGender)
+                        .FirstOrDefault();
+
+                    operations = operations.Where(o => o.IdGender == selectedCounterpartyId);
+                
             }
 
             if (StatusCMB.SelectedItem != null)
@@ -174,7 +191,7 @@ namespace VKRTalalaev.PageFolder
         {
             using (var context = DBEntities.GetContext())
             {
-                var employer = context.Employer
+                var employer = DBEntities.GetContext().Employer
                                       .Where(e => e.IdUser == VariableClass.CurentUser)
                                       .Select(e => e.Photo)
                                       .FirstOrDefault();
@@ -228,8 +245,40 @@ namespace VKRTalalaev.PageFolder
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
+            if (ListBox_Resource.SelectedItem == null)
+                return;
 
+            Employer selectedResource = ListBox_Resource.SelectedItem as Employer;
+            if (selectedResource == null)
+                return;
+
+            if (MBClass.QuestionMB("Удалить сотрудника " + $"{selectedResource.Name}?"))
+            {
+                var context = DBEntities.GetContext();
+
+                // Find the entity by its key to ensure it's attached to the context
+                var resource = DBEntities.GetContext().Employer.Find(selectedResource.IdEmployer);
+
+                if (resource != null)
+                {
+                    // Remove the entity
+                    DBEntities.GetContext().Employer.Remove(resource);
+
+                    // Save changes
+                    DBEntities.GetContext().SaveChanges();
+
+                    // Update the ListBox's ItemSource
+                    MBClass.InfoMB("Сотрудник удалён");
+                    ListBox_Resource.ItemsSource = DBEntities.GetContext().Employer.ToList().OrderBy(u => u.Name);
+                }
+                else
+                {
+                    MBClass.ErrorMB("Сотрудник не найден в базе данных.");
+                }
+            }
         }
+
+
 
         private void LoadPieChartData()
         {

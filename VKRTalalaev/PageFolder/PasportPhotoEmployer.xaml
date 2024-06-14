@@ -1,0 +1,25 @@
+﻿<Page x:Class="VKRTalalaev.PageFolder.PasportPhotoEmployer"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKRTalalaev.PageFolder"
+      mc:Ignorable="d" 
+      d:DesignHeight="682" d:DesignWidth="885"
+      Title="PasportPhotoEmployer">
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0,0.9" StartPoint="0.3,0">
+            <GradientStop Color="#151C2B"/>
+            <GradientStop Color="#485E90" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+    <Grid Margin="35">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="559*"/>
+            <RowDefinition Height="53*"/>
+        </Grid.RowDefinitions>
+        <Image HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" x:Name="PasportPhotoIMG" Height="537" Width="810" />
+        <Button Content="Закрыть" HorizontalAlignment="Center" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Height="43" Width="275" Click="Button_Click"/>
+
+    </Grid>
+</Page>

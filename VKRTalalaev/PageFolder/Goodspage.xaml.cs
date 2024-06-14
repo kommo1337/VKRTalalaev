@@ -34,6 +34,9 @@ namespace VKRTalalaev.PageFolder
             LoadComboBoxData();
             LoadEllipseImage();
             DBEntities.ResetContext();
+            OperationsDataGrid.ItemsSource = DBEntities.GetContext().Goods.
+        ToList().OrderBy(u => u.IdGoods);
+            DBEntities.ResetContext();
             using (var context = DBEntities.GetContext())
             {
                 var employer = context.Employer
@@ -53,18 +56,18 @@ namespace VKRTalalaev.PageFolder
         }
         private void LoadComboBoxData()
         {
+            DBEntities.ResetContext();
             NazvanieCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.Name).Distinct().ToList();
             ArticulCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.Articul).Distinct().ToList();
-            using (var context = DBEntities.GetContext())
-            {
-                CounterpartyCMB.ItemsSource = context.Operation
-                    .Join(context.Counterparty,
+            
+                CounterpartyCMB.ItemsSource = DBEntities.GetContext().Operation
+                    .Join(DBEntities.GetContext().Counterparty,
                           o => o.IdCounterParty,
                           c => c.IdCounterparty,
                           (o, c) => c.CounterpartyName)
                     .Distinct()
                     .ToList();
-            }
+            
             PriceCMB.ItemsSource = DBEntities.GetContext().Goods.Select(o => o.Price).Distinct().ToList();
         }
 
@@ -88,15 +91,14 @@ namespace VKRTalalaev.PageFolder
             if (CounterpartyCMB.SelectedItem != null)
             {
                 string selectedCounterpartyName = (string)CounterpartyCMB.SelectedItem;
-                using (var context = DBEntities.GetContext())
-                {
-                    int selectedCounterpartyId = context.Counterparty
+                
+                    int selectedCounterpartyId = DBEntities.GetContext().Counterparty
                         .Where(c => c.CounterpartyName == selectedCounterpartyName)
                         .Select(c => c.IdCounterparty)
                         .FirstOrDefault();
 
                     operations = operations.Where(o => o.IdCounterparty == selectedCounterpartyId);
-                }
+                
             }
 
             if (PriceCMB.SelectedItem != null)
@@ -227,6 +229,42 @@ namespace VKRTalalaev.PageFolder
                 };
 
                 pieChart.Series = seriesCollection;
+            }
+        }
+
+        private void DeleteIt_Click(object sender, RoutedEventArgs e)
+        {
+            if (OperationsDataGrid.SelectedItem == null)
+                return;
+
+            Goods selectedResource = OperationsDataGrid.SelectedItem as Goods;
+            if (selectedResource == null)
+                return;
+
+            if (MBClass.QuestionMB("Удалить товар " + $"{selectedResource.Name}?"))
+            {
+                DBEntities.ResetContext();
+                var context = DBEntities.GetContext();
+
+                
+                var resource = DBEntities.GetContext().Employer.Find(selectedResource.IdGoods);
+
+                if (resource != null)
+                {
+                    
+                    DBEntities.GetContext().Employer.Remove(resource);
+
+                    
+                    DBEntities.GetContext().SaveChanges();
+
+                    
+                    MBClass.InfoMB("Товар удалён");
+                    OperationsDataGrid.ItemsSource = DBEntities.GetContext().Goods.ToList().OrderBy(u => u.IdGoods);
+                }
+                else
+                {
+                    MBClass.ErrorMB("Товар не найден в базе данных.");
+                }
             }
         }
     }

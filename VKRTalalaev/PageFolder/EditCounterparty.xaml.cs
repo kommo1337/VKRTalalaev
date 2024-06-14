@@ -81,37 +81,32 @@ namespace VKRTalalaev.PageFolder
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
-                DBEntities.ResetContext(); // Сброс контекста перед созданием нового
-                using (var context = DBEntities.GetContext())
-                {
+                
+                
                     int index6 = AdresCb.SelectedIndex + 1;
                     var userId = user.IdCounterparty;
 
-                    var userFromDb = context.Counterparty
+                    var userFromDb = DBEntities.GetContext().Counterparty
                                              .FirstOrDefault(u => u.IdCounterparty == userId);
 
                     if (userFromDb != null)
                     {
                         userFromDb.IdAdress = index6;
+                        userFromDb.CounterpartyName = CounterPartyNameTb.Text;
                         userFromDb.INN = int.Parse(NameOperationTb.Text);
                         userFromDb.KPP = int.Parse(KPPTb.Text);
                         userFromDb.OGRN = int.Parse(OgrnipTb.Text);
                         userFromDb.FinancialAccaunt = int.Parse(FinAccTb.Text);
                         userFromDb.PasportPhoto = FotoImageData;
-
-                        context.SaveChanges();
+                        DBEntities.GetContext().SaveChanges();
                         MBClass.ShowMesagePopup("Успешно", Application.Current.MainWindow);
                     }
                     else
                     {
                         MBClass.ShowMesagePopup("Пользователь не найден", Application.Current.MainWindow);
                     }
-            }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MBClass.ShowErrorPopup(ex.Message, Application.Current.MainWindow);
-            //}
+            
+            
 
         }
 
@@ -143,11 +138,6 @@ namespace VKRTalalaev.PageFolder
             {
                 ClassFolder.MBClass.ErrorMB("Ошибка при загрузке изображения: " + ex.Message);
             }
-
-            
         }
     }
-
-
-
 }

@@ -17,6 +17,7 @@ namespace VKRTalalaev.DataFolder
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Counterparty()
         {
+            this.Goods = new HashSet<Goods>();
             this.Operation = new HashSet<Operation>();
         }
     
@@ -30,6 +31,8 @@ namespace VKRTalalaev.DataFolder
         public int FinancialAccaunt { get; set; }
     
         public virtual Adress Adress { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Goods> Goods { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Operation> Operation { get; set; }
     }

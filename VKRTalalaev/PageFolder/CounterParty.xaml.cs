@@ -71,6 +71,7 @@ namespace VKRTalalaev.PageFolder
 
         private void LoadDataGridData()
         {
+            DBEntities.ResetContext();
             var operations = DBEntities.GetContext().Counterparty.AsQueryable();
 
             if (NazvanieCMB.SelectedItem != null)
@@ -199,12 +200,43 @@ namespace VKRTalalaev.PageFolder
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(new FullInfoEmployer(ListBox_Resource.SelectedItem as Employer));
+            NavigationService.Navigate(new FullInfoCounterpartyPage(ListBox_Resource.SelectedItem as Counterparty));
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
+            if (ListBox_Resource.SelectedItem == null)
+                return;
 
+            Counterparty selectedResource = ListBox_Resource.SelectedItem as Counterparty;
+            if (selectedResource == null)
+                return;
+
+            if (MBClass.QuestionMB("Удалить контрагент " + $"{selectedResource.CounterpartyName}?"))
+            {
+                DBEntities.ResetContext ();
+                var context = DBEntities.GetContext();
+
+                // Find the entity by its key to ensure it's attached to the context
+                var resource = DBEntities.GetContext().Counterparty.Find(selectedResource.IdCounterparty);
+
+                if (resource != null)
+                {
+                    // Remove the entity
+                    DBEntities.GetContext().Counterparty.Remove(resource);
+
+                    // Save changes
+                    DBEntities.GetContext().SaveChanges();
+
+                    // Update the ListBox's ItemSource
+                    MBClass.InfoMB("Контрагент удалён");
+                    ListBox_Resource.ItemsSource = DBEntities.GetContext().Counterparty.ToList().OrderBy(u => u.CounterpartyName);
+                }
+                else
+                {
+                    MBClass.ErrorMB("Кнтрагент не найден в базе данных.");
+                }
+            }
         }
 
         private void ListBox_Resource_ContextMenuOpening(object sender, ContextMenuEventArgs e)

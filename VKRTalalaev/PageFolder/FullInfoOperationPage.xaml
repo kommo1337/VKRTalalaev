@@ -1,0 +1,92 @@
+﻿<Page x:Class="VKRTalalaev.PageFolder.FullInfoOperationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VKRTalalaev.PageFolder"
+      mc:Ignorable="d" 
+  d:DesignHeight="682" d:DesignWidth="885"
+      Title="FullInfoOperationPage">
+
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0,0.9" StartPoint="0.3,0">
+            <GradientStop Color="#151C2B"/>
+            <GradientStop Color="#485E90" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71" />
+            <RowDefinition Height="420"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.ColumnSpan="2" Text="Информация об операции" Foreground="White" FontSize="24" HorizontalAlignment="Left" Margin="293,20,0,0" Width="299"/>
+
+        <!-- Left Panel -->
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="293" Width="200" Grid.Row="1" Panel.ZIndex="1">
+            <TextBlock Text="Название операции" Foreground="WhiteSmoke" Margin="0 9 0 0" />
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding NameOperation}"/>
+            </Border>
+            <TextBlock Text="Тип операции" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6" Margin="0 5">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding TypeOfOperation.TypeName}"/>
+            </Border>
+            <TextBlock Text="Дата перации" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding DateOperation, StringFormat=\{0:yyyy-MM-dd\}}"/>
+            </Border>
+            <TextBlock Text="Поставщик" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Counterparty.CounterpartyName}"/>
+            </Border>
+
+        </StackPanel>
+
+        <!-- Right Panel -->
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="393" Width="200" Grid.Row="1" Panel.ZIndex="1" Margin="106,44,0,0" Grid.RowSpan="2">
+            <TextBlock Text="Статус" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Status.StatusName}"/>
+            </Border>
+            <TextBlock Text="Проект" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6" Margin="0 5">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Project.ProjectName}"/>
+            </Border>
+            <TextBlock Text="Тип" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6" Margin="0 5">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Type.Name}"/>
+            </Border>
+            <TextBlock Text="Товар" Foreground="WhiteSmoke" Margin="0 9 0 0"/>
+            <Border  Background ="#2C3957" Height="42" CornerRadius="6" Margin="0 5">
+                <TextBlock  Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="8" Text="{Binding Goods.Name}"/>
+            </Border>
+
+        </StackPanel>
+        <Border BorderThickness="1" Grid.Row="1" Margin="74,5,74,141" CornerRadius="28" Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#202532" Offset="0.163"/>
+                    <GradientStop Color="#FF33334C" Offset="0.987"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <Border BorderThickness="1" Grid.Row="1" Margin="58,5,89,141" CornerRadius="28" Grid.RowSpan="2" Grid.Column="1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#202532" Offset="0.163"/>
+                    <GradientStop Color="#FF33334C" Offset="0.987"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Button Content="Назад" Name="BackButton" HorizontalAlignment="Left" Margin="362,108,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="160" Click="BackButton_Click"/>
+
+    </Grid>
+</Page>

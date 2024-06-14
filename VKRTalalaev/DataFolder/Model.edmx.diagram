@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3c8adac86a694960ac3dbf915353ea42" Name="Diagram1">
+      <Diagram DiagramId="c373b0bf7e1942db865ca00063deeb3d" Name="Diagram1">
         <EntityTypeShape EntityType="DBModel.Adress" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.City" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Counterparty" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Counterparty" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.Employer" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.Gender" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Goods" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Operation" Width="1.5" PointX="7.5" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Project" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Goods" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Operation" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Project" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.Role" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Status" Width="1.5" PointX="5.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Status" Width="1.5" PointX="7.5" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.Street" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.Type" Width="1.5" PointX="5.25" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBModel.TypeOfOperation" Width="1.5" PointX="5.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Type" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.TypeOfOperation" Width="1.5" PointX="7.5" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.User" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
         <AssociationConnector Association="DBModel.FK_Adress_City" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK_Adress_Street" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK_Counterparty_Adress" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK_Employer_Adress" ManuallyRouted="false" />
+        <AssociationConnector Association="DBModel.FK_Goods_Counterparty" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK_Operation_Counterparty" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK_Employer_Gender" ManuallyRouted="false" />
         <AssociationConnector Association="DBModel.FK_Employer_User" ManuallyRouted="false" />

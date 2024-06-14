@@ -45,7 +45,7 @@ Background="Transparent" Foreground="white"
 BorderThickness="0" TextChanged="SearchTb_TextChanged" Margin="6,2,0,0" />
             </Border>
 
-            <TextBlock Text="" x:Name="NameUserTb" Margin="190 0 0 0" Width="60" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
+            <TextBlock Text="" x:Name="NameUserTb" Margin="160 0 0 0" Width="88" TextWrapping="Wrap"  Foreground="WhiteSmoke" VerticalAlignment="Center" FontSize="18"/>
 
             <StackPanel Margin="19 0 0 0"  Height="39">
                 <Ellipse Width="40" Height="40" Name="MyElipse" VerticalAlignment="Top">
